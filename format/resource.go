@@ -63,9 +63,14 @@ func (r *Resource) getHtmlCodeText() (string, error) {
 }
 
 // getHtmlDocText returns parse markdown doc text.
-func (r *Resource) getHtmlDocText() (string, error) {
+func (r *Resource) getHtmlDocText() error {
 	file := terraform.ResourceMap[r.name]
-	return net.GetDocFromGithub(r.version, file, true)
+	s, err := net.GetDocFromGithub(r.version, file, true)
+	if err != nil {
+		return err
+	}
+	r.htmlCache = s
+	return nil
 }
 
 func (r *Resource) initRegex() error {
