@@ -27,8 +27,8 @@ func main() {
 		log.Fatal().Err(err).Msg("parse parameters error")
 	}
 
-	resources := util.ConvertString2slice(*resource)
-	datas := util.ConvertString2slice(*data)
+	resources := util.ConvertString2slice(*resource, ",")
+	datas := util.ConvertString2slice(*data, ",")
 
 	if err := Run(resources, datas, *file, *version); err != nil {
 		log.Fatal().Err(err).Msg("parse terraform templates error")

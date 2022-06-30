@@ -22,6 +22,7 @@ func Bytes2String(b []byte) string {
 	return *(*string)(unsafe.Pointer(&b))
 }
 
-func ConvertString2slice(in string) []string {
-	return strings.Split(in, ",")
+// ConvertString2slice convert string to string slice according to sep.
+func ConvertString2slice(in string, sep string) []string {
+	return strings.Split(in, sep)
 }
