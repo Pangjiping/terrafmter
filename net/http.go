@@ -53,7 +53,6 @@ func GetDocFromGithub(version, file string, isResource bool) (string, error) {
 	clear_dom(doc, false)
 	str := node2text(doc)
 	return str, nil
-
 }
 
 // getHttpAddr build http url to go code.

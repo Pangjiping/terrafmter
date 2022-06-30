@@ -76,3 +76,8 @@ func (r *Resource) getHtmlDocText() error {
 func (r *Resource) initRegex() error {
 	return nil
 }
+
+// todo: scan .md and parse field to r.Fields
+func (r *Resource) scan() error {
+	return nil
+}
