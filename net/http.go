@@ -3,9 +3,16 @@ package net
 import (
 	"bytes"
 	"fmt"
-	"golang.org/x/net/html"
 	"net/http"
 	"strings"
+
+	"github.com/Pangjiping/terrafmtter/util"
+	"golang.org/x/net/html"
+)
+
+const (
+	// fileLoc = "/tmp/terrafmtter/"
+	fileLoc = ""
 )
 
 // GetCodeFromGithub fetch html page from alicloud provider github.
@@ -53,6 +60,24 @@ func GetDocFromGithub(version, file string, isResource bool) (string, error) {
 	clear_dom(doc, false)
 	str := node2text(doc)
 	return str, nil
+}
+
+func GetDocFromGithubV2(version, file string, isResource bool) error {
+	resp, err := http.Get(getHttpAddrV2(version, file, isResource))
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("http server error, status code is %v", resp.StatusCode)
+	}
+
+	doc, err := html.Parse(resp.Body)
+	if err != nil {
+		return err
+	}
+	h := node2html(doc)
+	return util.ConvertHtml2Md("test.markdown", h)
 }
 
 // getHttpAddr build http url to go code.

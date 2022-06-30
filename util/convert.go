@@ -4,6 +4,8 @@ import (
 	"reflect"
 	"strings"
 	"unsafe"
+
+	md "github.com/JohannesKaufmann/html-to-markdown"
 )
 
 // String2Bytes convert string to bytes.
@@ -25,4 +27,14 @@ func Bytes2String(b []byte) string {
 // ConvertString2slice convert string to string slice according to sep.
 func ConvertString2slice(in string, sep string) []string {
 	return strings.Split(in, sep)
+}
+
+func ConvertHtml2Md(filePath, html string) error {
+	converter := md.NewConverter("", true, nil)
+	markdown, err := converter.ConvertString(html)
+	if err != nil {
+		return err
+	}
+
+	return WriteToFile(filePath, markdown)
 }

@@ -1,8 +1,9 @@
 package net
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 var (
@@ -30,4 +31,9 @@ func TestGetDocFromGithub(t *testing.T) {
 	s, err := GetDocFromGithub(version, doc, false)
 	assert.Nil(t, err)
 	assert.NotNil(t, s)
+}
+
+func TestGetDocFromGithubV2(t *testing.T) {
+	err := GetDocFromGithubV2(version, doc, false)
+	assert.Nil(t, err)
 }
