@@ -7,6 +7,7 @@ import (
 	"os"
 )
 
+// WriteToFile write data to filePath.
 func WriteToFile(filePath string, data interface{}) error {
 	var out string
 	switch data.(type) {

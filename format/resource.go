@@ -1,20 +1,32 @@
 package format
 
+import (
+	"fmt"
+	"github.com/Pangjiping/terrafmter/net"
+	"github.com/Pangjiping/terrafmter/terraform"
+)
+
 type Resource struct {
 	AccessKey string
 	SecretKey string
 	Region    string
-	Name      string
+	name      string
+	htmlCache string
+	version   string
 	Fields    map[string]Field
 }
 
-func NewResource(r string) (Formatter, error) {
+func NewResource(version, r string) (Formatter, error) {
 	var (
 		accKey string
 		secKey string
 		region string
 		err    error
 	)
+
+	if valid := validateResource(r); !valid {
+		return nil, fmt.Errorf("invalid resource type: %s", r)
+	}
 
 	if accKey, err = getAccessKey(); err != nil {
 		return nil, err
@@ -26,7 +38,8 @@ func NewResource(r string) (Formatter, error) {
 		return nil, err
 	}
 	return &Resource{
-		Name:      r,
+		name:      r,
+		version:   version,
 		AccessKey: accKey,
 		SecretKey: secKey,
 		Region:    region,
@@ -40,4 +53,21 @@ func (r *Resource) Format() error {
 
 func (r *Resource) Cleanup() {
 
+}
+
+// getHtmlCodeText returns parsed code text.
+// Deprecated
+func (r *Resource) getHtmlCodeText() (string, error) {
+	file := terraform.ResourceMap[r.name]
+	return net.GetCodeFromGithub(r.version, file)
+}
+
+// getHtmlDocText returns parse markdown doc text.
+func (r *Resource) getHtmlDocText() (string, error) {
+	file := terraform.ResourceMap[r.name]
+	return net.GetDocFromGithub(r.version, file, true)
+}
+
+func (r *Resource) initRegex() error {
+	return nil
 }

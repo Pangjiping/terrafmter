@@ -1,28 +1,134 @@
 package net
 
 import (
+	"bytes"
 	"fmt"
-	"github.com/Pangjiping/terrafmter/util"
-	"io/ioutil"
+	"golang.org/x/net/html"
 	"net/http"
+	"strings"
 )
 
+// GetCodeFromGithub fetch html page from alicloud provider github.
+// Then clean html page and parse it to string.
+// Deprecated
 func GetCodeFromGithub(version, file string) (string, error) {
 	resp, err := http.Get(getHttpAddr(version, file))
 	if err != nil {
 		return "", err
 	}
 	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return "", fmt.Errorf("http server error, status code is %v", resp.StatusCode)
+	}
 
-	body, err := ioutil.ReadAll(resp.Body)
+	// parse html
+	doc, err := html.Parse(resp.Body)
 	if err != nil {
 		return "", err
 	}
-	s := util.Bytes2String(body)
-	err = util.WriteToFile("test.go", s)
-	return s, err
+
+	clear_dom(doc, false)
+	str := node2text(doc)
+	return str, nil
 }
 
+// GetDocFromGithub fetch html page from alicloud provider docs.
+// Then clean html and parse it to string.
+func GetDocFromGithub(version, file string, isResource bool) (string, error) {
+	resp, err := http.Get(getHttpAddrV2(version, file, isResource))
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return "", fmt.Errorf("http server error, status code is %v", resp.StatusCode)
+	}
+
+	// parse html
+	doc, err := html.Parse(resp.Body)
+	if err != nil {
+		return "", err
+	}
+
+	clear_dom(doc, false)
+	str := node2text(doc)
+	return str, nil
+
+}
+
+// getHttpAddr build http url to go code.
+// Deprecated
 func getHttpAddr(version, file string) string {
 	return fmt.Sprintf(`https://github.com/aliyun/terraform-provider-alicloud/blob/v%s/alicloud/%s`, version, file)
+}
+
+// getHttpAddrV2 build http url to markdown.
+func getHttpAddrV2(version, file string, isResource bool) string {
+	if isResource {
+		return fmt.Sprintf(`https://github.com/aliyun/terraform-provider-alicloud/blob/v%s/website/docs/r/%s.html.markdown`, version, file)
+	} else {
+		return fmt.Sprintf(`https://github.com/aliyun/terraform-provider-alicloud/blob/v%s/website/docs/d/%s.html.markdown`, version, file)
+	}
+}
+
+// clear_dom clean html node recursively.
+func clear_dom(pn *html.Node, isgb2312 bool) error {
+	for nd := pn.FirstChild; nd != nil; {
+		switch nd.Type {
+		case html.ElementNode:
+			tn := strings.ToLower(nd.Data)
+			if tn == "script" || tn == "style" {
+				tmp := nd
+				nd = tmp.NextSibling
+				pn.RemoveChild(tmp)
+			} else if tn == "a" {
+				nd = nd.NextSibling
+				//if err = convert_dom(tmp, isgb2312); err != nil {
+				//	return err
+				//}
+			} else if tn == "span" {
+				tmp := nd
+				nd = nd.NextSibling
+				clear_dom(tmp, isgb2312)
+			} else {
+				nd = nd.NextSibling
+				//if err = convert_dom(tmp, isgb2312); err != nil {
+				//	return err
+				//}
+			}
+		case html.CommentNode:
+			tmp := nd
+			nd = tmp.NextSibling
+			pn.RemoveChild(tmp)
+		case html.TextNode:
+			nd = nd.NextSibling
+			//if err = convert_dom(tmp, isgb2312); err != nil {
+			//	return err
+			//}
+		default:
+			nd = nd.NextSibling
+		}
+	}
+	return nil
+}
+
+// node2html convert html nodes to html.
+func node2html(n *html.Node) string {
+	var buf = bytes.NewBuffer([]byte{})
+	html.Render(buf, n)
+	return buf.String()
+}
+
+// node2text convert html nodes to text.
+func node2text(node *html.Node) string {
+	if node.Type == html.TextNode {
+		return node.Data
+	} else if node.FirstChild != nil {
+		var buf bytes.Buffer
+		for c := node.FirstChild; c != nil; c = c.NextSibling {
+			buf.WriteString(node2text(c))
+		}
+		return buf.String()
+	}
+	return ""
 }
