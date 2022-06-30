@@ -1,4 +1,4 @@
-module github.com/Pangjiping/terrafmter
+module github.com/Pangjiping/terrafmtter
 
 go 1.17
 

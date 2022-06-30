@@ -1,6 +1,6 @@
 package format
 
-import "github.com/Pangjiping/terrafmter/terraform"
+import "github.com/Pangjiping/terrafmtter/terraform"
 
 const (
 	EMPTY = "nil"

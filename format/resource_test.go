@@ -1,9 +1,10 @@
 package format
 
 import (
-	"github.com/Pangjiping/terrafmter/terraform"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/Pangjiping/terrafmtter/terraform"
+	"github.com/stretchr/testify/assert"
 )
 
 var (

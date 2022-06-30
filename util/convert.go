@@ -2,6 +2,7 @@ package util
 
 import (
 	"reflect"
+	"strings"
 	"unsafe"
 )
 
@@ -19,4 +20,8 @@ func String2Bytes(s string) []byte {
 // Bytes2String convert bytes to string.
 func Bytes2String(b []byte) string {
 	return *(*string)(unsafe.Pointer(&b))
+}
+
+func ConvertString2slice(in string) []string {
+	return strings.Split(in, ",")
 }

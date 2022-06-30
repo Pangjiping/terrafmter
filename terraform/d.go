@@ -14,5 +14,7 @@ func init() {
 		"kubernetes_version":             "cs_kubernetes_version",
 		"managed_kubernetes_clusters":    "cs_managed_kubernetes_clusters",
 		"serverless_kubernetes_clusters": "cs_serverless_kubernetes_clusters",
+
+		// other data sources ...
 	}
 }

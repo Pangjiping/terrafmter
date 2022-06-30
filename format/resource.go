@@ -2,8 +2,9 @@ package format
 
 import (
 	"fmt"
-	"github.com/Pangjiping/terrafmter/net"
-	"github.com/Pangjiping/terrafmter/terraform"
+
+	"github.com/Pangjiping/terrafmtter/net"
+	"github.com/Pangjiping/terrafmtter/terraform"
 )
 
 type Resource struct {

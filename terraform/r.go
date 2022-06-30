@@ -14,5 +14,7 @@ func init() {
 		"kubernetes_autoscaler":  "cs_kubernetes_autoscaler",
 		"kubernetes_node_pool":   "cs_kubernetes_node_pool",
 		"kubernetes_permissions": "cs_kubernetes_permissions",
+
+		// other resources ...
 	}
 }

@@ -2,21 +2,24 @@ package main
 
 import (
 	"flag"
+	"os"
+
+	"github.com/Pangjiping/terrafmtter/util"
 	"github.com/peterbourgon/ff"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
-	"os"
 )
 
 func main() {
 	log.Logger = log.Logger.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 
-	fs := flag.NewFlagSet("terrafmter", flag.ExitOnError)
+	// todo: more short?
+	fs := flag.NewFlagSet("terrafmtter", flag.ExitOnError)
 	var (
 		resource = fs.String("resource", "nil", "resource to create")
 		data     = fs.String("data", "nil", "data source to query")
+		version  = fs.String("version", "latest", "terrform provider version for alicloud")
 		file     = fs.String("file", "main.tf", "auto generate terraform file")
-		saved    = fs.String("saved", "nil", "saved function")
 	)
 
 	err := ff.Parse(fs, os.Args[1:])
@@ -24,12 +27,15 @@ func main() {
 		log.Fatal().Err(err).Msg("parse parameters error")
 	}
 
-	if err := Run(*resource, *data, *file, *saved); err != nil {
+	resources := util.ConvertString2slice(*resource)
+	datas := util.ConvertString2slice(*data)
+
+	if err := Run(resources, datas, *file, *version); err != nil {
 		log.Fatal().Err(err).Msg("parse terraform templates error")
 	}
 }
 
-func Run(r, d, filename, saved string) error {
+func Run(resources []string, datas []string, filename, version string) error {
 	file, err := os.Open(filename)
 	if err != nil {
 		return err
