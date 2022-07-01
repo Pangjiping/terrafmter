@@ -31,13 +31,13 @@ func validateResource(rs []string) (string, bool) {
 	return "", true
 }
 
-func validateDataSource(d string) bool {
-	for k := range terraform.DataSourceMap {
-		if k == d {
-			return true
+func validateDataSource(ds []string) (string, bool) {
+	for _, d := range ds {
+		if _, ok := terraform.DataSourceMap[d]; !ok {
+			return d, false
 		}
 	}
-	return false
+	return "", true
 }
 
 type response struct {

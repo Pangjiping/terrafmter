@@ -14,7 +14,7 @@ import (
 
 type Resource struct {
 	Region  string
-	names   []string
+	Names   []string
 	version string
 	// first key is resource name
 	// second key is fields
@@ -40,7 +40,7 @@ func NewResource(version string, rs []string) (*Resource, error) {
 		names = append(names, terraform.ResourceMap[r])
 	}
 	return &Resource{
-		names:   names,
+		Names:   names,
 		version: version,
 		Region:  region,
 		Fields:  make(map[string]map[string]interface{}),
@@ -67,7 +67,7 @@ func (r *Resource) Cleanup() {
 // getHtmlCodeText returns parsed code text.
 // Deprecated
 func (r *Resource) getHtmlCodeText() error {
-	for _, re := range r.names {
+	for _, re := range r.Names {
 		_, err := net.GetCodeFromGithub(r.version, re)
 		if err != nil {
 			return err
@@ -79,12 +79,12 @@ func (r *Resource) getHtmlCodeText() error {
 // getHtmlDocText returns parse markdown doc text.
 // enhancement goroutine
 func (r *Resource) getHtmlDocText() error {
-	total := len(r.names)
+	total := len(r.Names)
 	errChan := make(chan error, total) // accept errors
 	respChan := make(chan struct{})
 	defer close(errChan)
 	defer close(respChan)
-	for _, re := range r.names {
+	for _, re := range r.Names {
 		go func(reso string) {
 			if err := net.GetDocFromGithubV2(r.version, reso, true); err != nil {
 				errChan <- err
@@ -117,7 +117,7 @@ func (r *Resource) initRegex() error {
 // todo: goroutine
 // scan scans markdown files and parse them into fields.
 func (r *Resource) scan() error {
-	for _, re := range r.names {
+	for _, re := range r.Names {
 		resourceName := strings.Join([]string{"alicloud_", re}, "")
 		r.Fields[resourceName] = make(map[string]interface{})
 		res, err := util.ParseResource(re)
