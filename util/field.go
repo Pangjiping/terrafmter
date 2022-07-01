@@ -29,6 +29,7 @@ type Resource struct {
 
 // parseResource
 // resourceName - cs_kubernetes_version.md
+// todo: cancel attr regex
 func parseResource(resourceName string) (*Resource, error) {
 	filePath := strings.Join([]string{FILE_LOC_PREFIX, resourceName, ".md"}, "")
 	file, err := os.Open(filePath)
