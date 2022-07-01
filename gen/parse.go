@@ -1,27 +1,21 @@
 package gen
 
 import (
-	"embed"
 	"fmt"
 	"github.com/Pangjiping/terrafmtter/format"
 	"github.com/Pangjiping/terrafmtter/util"
-	"io/ioutil"
 	"os"
-	"path"
 	"sync"
 	"text/template"
 )
 
-//go:embed templates/*
-var tmpl embed.FS
-
 var (
-	mappings []*format.SchemaMapping
+	mappings []format.SchemaMapping
 	rwlock   sync.RWMutex
 )
 
 func init() {
-	mappings = make([]*format.SchemaMapping, 0)
+	mappings = make([]format.SchemaMapping, 0)
 	rwlock = sync.RWMutex{}
 }
 
@@ -68,8 +62,9 @@ func formatMapping(resources, datas []string, version string) error {
 				return
 			}
 			rwlock.Lock()
-			mappings = append(mappings, mapping)
+			mappings = append(mappings, *mapping)
 			rwlock.Unlock()
+			respChan <- struct{}{}
 		}(ds, version)
 	}
 
@@ -82,8 +77,9 @@ func formatMapping(resources, datas []string, version string) error {
 				return
 			}
 			rwlock.Lock()
-			mappings = append(mappings, mapping)
+			mappings = append(mappings, *mapping)
 			rwlock.Unlock()
+			respChan <- struct{}{}
 		}(re, version)
 	}
 
@@ -103,13 +99,20 @@ func formatMapping(resources, datas []string, version string) error {
 }
 
 func renderFile() error {
-	workDir, _ := ioutil.TempDir("", "terraform")
-	tpl, err := template.New("").Parse(terraformBaseTemplate)
+
+	// the name inc is what the function will be called in the template text.
+	funcMap := template.FuncMap{
+		"inc": func(i int) int {
+			return i + 1
+		},
+	}
+
+	tpl, err := template.New("").Funcs(funcMap).Parse(terraformBaseTemplate)
 	if err != nil {
 		return err
 	}
 
-	f, err := os.OpenFile(path.Join(workDir, "main.tf"), os.O_WRONLY|os.O_CREATE, 0644)
+	f, err := os.OpenFile("main.tf", os.O_WRONLY|os.O_CREATE, 0644)
 	if err != nil {
 		return err
 	}

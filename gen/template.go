@@ -9,7 +9,7 @@ var terraformBaseTemplate = `
 # TODO: please add your secret information.
 # which could refer to https://registry.terraform.io/providers/aliyun/alicloud/latest/docs
 provider "alicloud" {
-    region = "${var.region}"
+    
 }
 
 {{ range .}}
@@ -17,10 +17,12 @@ provider "alicloud" {
 # TODO: please edit.
 {{ .Type }} "alicloud_{{ .Name}}" "default" {
     {{ range .Fields}}
-    # description: {{ .Description}}
+		{{range .Description}}
+	# Description: {{.}}
+		{{end}}
     # It's {{ .OptOrReq}}
-    # ForceNew: {{ .Field.ForceNew}}
-    {{ .Name}}                      =
+    # ForceNew: {{ .ForceNew}}
+    {{ .Name}} = "TODO" 
     {{ end }}
 }
 {{ end }}

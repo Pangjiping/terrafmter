@@ -23,7 +23,7 @@ func NewDataSource(version string, ds []string) (Formatter, error) {
 		region string
 		err    error
 	)
-	d, valid := validateDataSource(ds)
+	d, valid := util.ValidateDataSource(ds)
 	if !valid {
 		return nil, fmt.Errorf("invalid data source type: %s", d)
 	}

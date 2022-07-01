@@ -100,7 +100,7 @@ func (sm *SchemaMapping) convertParsed2Fields(prev *parsed) error {
 				}
 			case DESCRIPTION:
 				descriptions := strings.Split(v2, ".")
-				field.Description = descriptions
+				field.Description = descriptions[0 : len(descriptions)-2]
 			default:
 			}
 		}
