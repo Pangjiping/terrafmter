@@ -40,8 +40,8 @@ func parseResource(resourceName string) (*Resource, error) {
 	argsRegex := regexp.MustCompile(`## Argument Reference`)
 	attrRegex := regexp.MustCompile(`## Attributes Reference`)
 	secondLevelRegex := regexp.MustCompile(`^#+`)
-	argumentsFieldRegex := regexp.MustCompile("^\\* `([a-zA-Z_0-9]*)`[ ]*-? ?(\\(.*\\)) ?(.*)")
-	attributeFieldRegex := regexp.MustCompile("^\\* `([a-zA-Z_0-9]*)`[ ]*-?(.*)")
+	argumentsFieldRegex := regexp.MustCompile("^\\- `([a-zA-Z_0-9]*)`[ \\\\]*-? ?(\\(.*\\)) ?(.*)")
+	attributeFieldRegex := regexp.MustCompile("^\\- `([a-zA-Z_0-9]*)`[ \\\\]*-?(.*)")
 
 	result := &Resource{
 		Name:       resourceName,

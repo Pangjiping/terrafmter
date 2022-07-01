@@ -1,8 +1,6 @@
 package format
 
 var (
-	accKey  = "hauifhakjsnfkaj"
-	secKey  = "fsuGAfakdnaGYmsnmxn"
 	region  = "cn-hangzhou"
 	version = "1.173.0"
 )
