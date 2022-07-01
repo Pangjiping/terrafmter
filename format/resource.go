@@ -35,8 +35,12 @@ func NewResource(version string, rs []string) (Formatter, error) {
 	if region, err = getRegion(); err != nil {
 		return nil, err
 	}
+	names := make([]string, 0)
+	for _, r := range rs {
+		names = append(names, terraform.ResourceMap[r])
+	}
 	return &Resource{
-		names:   rs,
+		names:   names,
 		version: version,
 		Region:  region,
 		Fields:  make(map[string]map[string]interface{}),
@@ -58,8 +62,7 @@ func (r *Resource) Cleanup() {
 // Deprecated
 func (r *Resource) getHtmlCodeText() error {
 	for _, re := range r.names {
-		file := terraform.ResourceMap[re]
-		_, err := net.GetCodeFromGithub(r.version, file)
+		_, err := net.GetCodeFromGithub(r.version, re)
 		if err != nil {
 			return err
 		}
@@ -70,8 +73,7 @@ func (r *Resource) getHtmlCodeText() error {
 // getHtmlDocText returns parse markdown doc text.
 func (r *Resource) getHtmlDocText() error {
 	for _, re := range r.names {
-		file := terraform.ResourceMap[re]
-		if err := net.GetDocFromGithubV2(r.version, file, true); err != nil {
+		if err := net.GetDocFromGithubV2(r.version, re, true); err != nil {
 			return err
 		}
 	}

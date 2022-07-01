@@ -38,10 +38,9 @@ func ParseResource(resourceName string) (*Parsed, error) {
 	defer file.Close()
 
 	argsRegex := regexp.MustCompile(`## Argument Reference`)
-	// attrRegex := regexp.MustCompile(`## Attributes Reference`)
 	secondLevelRegex := regexp.MustCompile(`^#+`)
 	argumentsFieldRegex := regexp.MustCompile("^\\- `([a-zA-Z_0-9]*)`[ \\\\]*-? ?(\\(.*\\)) ?(.*)")
-	// attributeFieldRegex := regexp.MustCompile("^\\- `([a-zA-Z_0-9]*)`[ \\\\]*-?(.*)")
+	// defaultSetRegex := regexp.MustCompile("Default [a-z]?(.*)")
 
 	result := &Parsed{
 		Name:      resourceName,
@@ -58,11 +57,6 @@ func ParseResource(resourceName string) (*Parsed, error) {
 			phase = ARGUMENT
 			continue
 		}
-		//if attrRegex.MatchString(line) {
-		//	record = true
-		//	phase = ATTRIBUTE
-		//	continue
-		//}
 		if secondLevelRegex.MatchString(line) && strings.HasSuffix(line, PARAMS) {
 			record = true
 			continue
@@ -77,9 +71,6 @@ func ParseResource(resourceName string) (*Parsed, error) {
 			if phase == ARGUMENT {
 				matched = argumentsFieldRegex.FindAllStringSubmatch(line, 1)
 			}
-			//} else if phase == ATTRIBUTE {
-			//	matched = attributeFieldRegex.FindAllStringSubmatch(line, 1)
-			//}
 
 			for _, m := range matched {
 				field := parseMatchLine(m, phase)
@@ -107,14 +98,11 @@ func parseMatchLine(words []string, phase string) map[string]interface{} {
 		if strings.Contains(words[2], FORCENEW) {
 			res[FORCENEW] = true
 		}
+
+		// todo: get default
+
 		return res
 	}
-
-	//if phase == ATTRIBUTE && len(words) >= 3 {
-	//	res[NAME] = words[1]
-	//	res[DESCRIPTION] = words[2]
-	//	return res
-	//}
 	return nil
 }
 
