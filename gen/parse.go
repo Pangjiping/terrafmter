@@ -2,11 +2,12 @@ package gen
 
 import (
 	"fmt"
-	"github.com/Pangjiping/terrafmtter/format"
-	"github.com/Pangjiping/terrafmtter/util"
 	"os"
 	"sync"
 	"text/template"
+
+	"github.com/Pangjiping/terrafmtter/format"
+	"github.com/Pangjiping/terrafmtter/util"
 )
 
 var (
@@ -20,6 +21,7 @@ func init() {
 }
 
 func Execute(resources, datas []string, fileName, version string) error {
+	// valid product
 
 	// valid data and resource
 	r, ok := util.ValidateResource(resources)

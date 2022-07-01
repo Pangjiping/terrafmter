@@ -32,10 +32,9 @@ type Field struct {
 // NewSchemaMapping get SchemaMapping
 // name like kubernetes
 func NewSchemaMapping(version string, typ string, name string) *SchemaMapping {
-	fullName := strings.Join([]string{"cs", name}, "_")
 	return &SchemaMapping{
 		Type:    typ,
-		Name:    fullName,
+		Name:    name,
 		Version: version,
 		Fields:  make([]Field, 0),
 	}

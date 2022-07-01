@@ -2,8 +2,9 @@ package main
 
 import (
 	"flag"
-	"github.com/Pangjiping/terrafmtter/gen"
 	"os"
+
+	"github.com/Pangjiping/terrafmtter/gen"
 
 	"github.com/Pangjiping/terrafmtter/util"
 	"github.com/peterbourgon/ff"

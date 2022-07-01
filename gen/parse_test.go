@@ -1,16 +1,17 @@
 package gen
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 var (
 	resources = []string{
-		"managed_kubernetes",
+		"cs_managed_kubernetes",
 	}
 	datas = []string{
-		"kubernetes_version",
+		"cs_kubernetes_version",
 	}
 	version  = "1.173.0"
 	fileName = "main.tf"
