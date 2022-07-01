@@ -99,7 +99,8 @@ func (d *DataSource) scan() error {
 		if err != nil {
 			return err
 		}
-		d.Fields[dataSourceName] = res.arguments
+		res = res
+		// d.Fields[dataSourceName] = res.arguments
 	}
 	return nil
 }

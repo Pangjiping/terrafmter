@@ -114,7 +114,7 @@ Jump to
 
 - [Code](/aliyun/terraform-provider-alicloud/tree/v1.173.0)
 - [Issues312](/aliyun/terraform-provider-alicloud/issues)
-- [Pull requests104](/aliyun/terraform-provider-alicloud/pulls)
+- [Pull requests102](/aliyun/terraform-provider-alicloud/pulls)
 - [Actions](/aliyun/terraform-provider-alicloud/actions)
 - [Security](/aliyun/terraform-provider-alicloud/security)
 - [Insights](/aliyun/terraform-provider-alicloud/pulse)

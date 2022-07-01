@@ -124,7 +124,8 @@ func (r *Resource) scan() error {
 		if err != nil {
 			return err
 		}
-		r.Fields[resourceName] = res.arguments
+		// r.Fields[resourceName] = res.arguments
+		res = res
 	}
 	return nil
 }
