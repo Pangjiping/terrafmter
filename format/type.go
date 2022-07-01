@@ -39,3 +39,8 @@ func validateDataSource(d string) bool {
 	}
 	return false
 }
+
+type response struct {
+	finished bool
+	err      error
+}

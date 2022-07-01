@@ -18,6 +18,12 @@ var (
 		"cs_managed_kubernetes",
 		"cs_kubernetes_node_pool",
 	}
+
+	rs = []string{
+		"kubernetes",
+		"managed_kubernetes",
+		"kubernetes_node_pool",
+	}
 )
 
 func mockResource(resource []string) *Resource {
@@ -29,11 +35,36 @@ func mockResource(resource []string) *Resource {
 	}
 }
 
+// to download .md file and parse it to fields
+func TestResourceFormat(t *testing.T) {
+	resClient, err := NewResource(version, rs)
+	assert.Nil(t, err)
+	assert.NotNil(t, resClient)
+	err = resClient.Format()
+	assert.Nil(t, err)
+	assert.NotNil(t, resClient.Fields)
+	fmt.Println(resClient.Fields)
+}
+
+func TestGetDocFromWeb(t *testing.T) {
+	resClient, err := NewResource(version, rs)
+	assert.Nil(t, err)
+	assert.NotNil(t, resClient)
+	err = resClient.getHtmlDocText()
+	assert.Nil(t, err)
+}
+
 func TestScan(t *testing.T) {
 	resClient := mockResource(resources)
 	err := resClient.scan()
 	assert.Nil(t, err)
 	fmt.Println(resClient.Fields)
+}
+
+func TestCleanup(t *testing.T) {
+	resClient := mockResource(resources)
+	assert.NotNil(t, resClient)
+	resClient.Cleanup()
 }
 
 //func TestGetHtmlDocText(t *testing.T) {

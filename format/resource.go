@@ -21,7 +21,7 @@ type Resource struct {
 	Fields map[string]map[string]interface{}
 }
 
-func NewResource(version string, rs []string) (Formatter, error) {
+func NewResource(version string, rs []string) (*Resource, error) {
 	var (
 		region string
 		err    error
@@ -48,6 +48,12 @@ func NewResource(version string, rs []string) (Formatter, error) {
 }
 
 func (r *Resource) Format() error {
+	if err := r.getHtmlDocText(); err != nil {
+		return err
+	}
+	if err := r.scan(); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -71,12 +77,36 @@ func (r *Resource) getHtmlCodeText() error {
 }
 
 // getHtmlDocText returns parse markdown doc text.
+// enhancement goroutine
 func (r *Resource) getHtmlDocText() error {
+	total := len(r.names)
+	errChan := make(chan error, total) // accept errors
+	respChan := make(chan struct{})
+	defer close(errChan)
+	defer close(respChan)
 	for _, re := range r.names {
-		if err := net.GetDocFromGithubV2(r.version, re, true); err != nil {
+		go func(reso string) {
+			if err := net.GetDocFromGithubV2(r.version, reso, true); err != nil {
+				errChan <- err
+				return
+			}
+			respChan <- struct{}{}
+		}(re)
+	}
+
+	// error handle
+	for {
+		if total == 0 {
+			break
+		}
+		select {
+		case err := <-errChan:
 			return err
+		case <-respChan:
+			total--
 		}
 	}
+
 	return nil
 }
 
@@ -84,7 +114,8 @@ func (r *Resource) initRegex() error {
 	return nil
 }
 
-// todo: more simple?
+// todo: goroutine
+// scan scans markdown files and parse them into fields.
 func (r *Resource) scan() error {
 	for _, re := range r.names {
 		resourceName := strings.Join([]string{"alicloud_", re}, "")
