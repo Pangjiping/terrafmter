@@ -29,5 +29,5 @@ func WriteToFile(filePath string, data interface{}) error {
 			return err
 		}
 	}
-	return ioutil.WriteFile(filePath, String2Bytes(out), 422)
+	return ioutil.WriteFile(filePath, String2Bytes(out), 0677)
 }

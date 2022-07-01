@@ -11,8 +11,8 @@ import (
 )
 
 const (
-	// fileLoc = "/tmp/terrafmtter/"
-	fileLoc = ""
+	//FILE_LOC_PREFIX = "~/tmp/terrafmtter"
+	FILE_LOC_PREFIX = ""
 )
 
 // GetCodeFromGithub fetch html page from alicloud provider github.
@@ -62,6 +62,8 @@ func GetDocFromGithub(version, file string, isResource bool) (string, error) {
 	return str, nil
 }
 
+// GetDocFromGithubV2 fetch markdown doc from github.
+// It will be saved in a tmp dir.
 func GetDocFromGithubV2(version, file string, isResource bool) error {
 	resp, err := http.Get(getHttpAddrV2(version, file, isResource))
 	if err != nil {
@@ -77,7 +79,8 @@ func GetDocFromGithubV2(version, file string, isResource bool) error {
 		return err
 	}
 	h := node2html(doc)
-	return util.ConvertHtml2Md("test.markdown", h)
+	filePath := fmt.Sprintf("%s%s-%s.md", FILE_LOC_PREFIX, file, version)
+	return util.ConvertHtml2Md(filePath, h)
 }
 
 // getHttpAddr build http url to go code.
