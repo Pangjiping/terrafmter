@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Thu Jun 30 22:48:56 2022
+# Make data base, printed on Fri Jul  1 22:16:45 2022
 
 # Variables
 
@@ -15,8 +15,6 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
-# environment
-ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
 VSCODE_LOG_NATIVE = false
 # automatic
@@ -36,19 +34,15 @@ _ = /usr/bin/make
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # environment
-VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
-# environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 INFOPATH = /opt/homebrew/share/info:
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/s6/300jn_t108gbkxlxtcvb7yy00000gn/T/vscode-ipc-6503f6ad-b2b5-4cb9-a09a-5c7095455d15.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/s6/300jn_t108gbkxlxtcvb7yy00000gn/T/vscode-ipc-291be011-d985-4481-8449-2511b192381f.sock
 # environment
-VSCODE_CWD = /Users/pangjiping/gopath/src/github.com/Pangjiping/terrafmtter
-# environment
-GOPROXY = https://goproxy.cn
+VSCODE_CWD = /
 # environment
 PATH = /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/usr/local/go/bin:/Library/Apple/usr/bin:/opt/homebrew/bin/git:/Users/pangjiping/gopath/bin:/Users/pangjiping/gopath/src/github.com/etcd-io/etcd/bin
 # environment
@@ -62,7 +56,7 @@ MYGIT = /Users/pangjiping/gopath/src/github.com/Pangjiping
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.CLbKW8AgTc/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.l2m9RGYSjM/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -76,13 +70,11 @@ ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
 MANPATH = /opt/homebrew/share/man::
 # environment
-GOMODCACHE = /Users/pangjiping/gopath/pkg/mod
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /Users/pangjiping
 # default
 MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
-# environment
-VSCODE_CLI = 1
 # environment
 VSCODE_CODE_CACHE_PATH = /Users/pangjiping/Library/Application Support/Code/CachedData/30d9c6cd9483b2cc586687151bcbcd635f373630
 # environment
@@ -100,9 +92,7 @@ MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # environment
-SHLVL = 3
-# environment
-TERM_SESSION_ID = E1FF6B2E-DD16-418B-BBB0-4ABFBBDD1257
+SHLVL = 1
 # default
 MAKE_VERSION := 3.81
 # environment
@@ -115,8 +105,6 @@ HOMEBREW_BOTTLE_DOMAIN = https://mirrors.ustc.edu.cn/homebrew-bottles/bottles
 %D = $(patsubst %/,%,$(dir $%))
 # default
 MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
-# environment
-TERM_PROGRAM = Apple_Terminal
 # default
 .VARIABLES := 
 # environment
@@ -132,9 +120,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-TERM_PROGRAM_VERSION = 445
-# environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.8764579.8764585.744D78AA-C87E-4BDD-AF78-1F005192A273
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.8764579.8764585
 # environment
 HOMEBREW_PREFIX = /opt/homebrew
 # automatic
@@ -162,11 +148,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-TERM = xterm-256color
-# environment
-VSCODE_PID = 1246
+VSCODE_PID = 967
 # variable set hash-table stats:
-# Load=77/1024=8%, Rehash=0, Collisions=3/99=3%
+# Load=69/1024=7%, Rehash=0, Collisions=1/91=1%
 
 # Pattern-specific Variable Values
 
@@ -227,7 +211,7 @@ Makefile:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Jun 30 22:48:56 2022
+# Finished Make data base on Fri Jul  1 22:16:45 2022
 
  
 make: *** No rule to make target `all'.  Stop.

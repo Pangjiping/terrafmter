@@ -2,20 +2,23 @@ package format
 
 import (
 	"fmt"
-	"github.com/Pangjiping/terrafmtter/net"
 	"strings"
+
+	"github.com/Pangjiping/terrafmtter/net"
 )
 
 // source and data
 const (
-	DATA     = "data"
-	RESOURCE = "resource"
+	DATA       = "data"
+	RESOURCE   = "resource"
+	url_format = "https://registry.terraform.io/providers/aliyun/alicloud/%s/docs/%s/%s"
 )
 
 type SchemaMapping struct {
 	Type    string  // like data and resource
 	Name    string  // like cs_kubernetes, cs_managed_kubernetes
 	Version string  // like 1.173.0
+	Url     string  // doc url from hashicorp
 	Fields  []Field // schema
 }
 
@@ -40,6 +43,7 @@ func NewSchemaMapping(version string, typ string, name string) *SchemaMapping {
 
 func (sm *SchemaMapping) Format() error {
 	defer sm.cleanup()
+	sm.getUrl()
 	if err := sm.getDocs(); err != nil {
 		return err
 	}
@@ -107,4 +111,12 @@ func (sm *SchemaMapping) convertParsed2Fields(prev *parsed) error {
 		sm.Fields = append(sm.Fields, field)
 	}
 	return nil
+}
+
+func (sm *SchemaMapping) getUrl() {
+	if sm.Type == DATA {
+		sm.Url = fmt.Sprintf(url_format, sm.Version, "data-sources", sm.Name)
+	} else {
+		sm.Url = fmt.Sprintf(url_format, sm.Version, "resources", sm.Name)
+	}
 }
