@@ -1,4 +1,4 @@
-terraform-provider-alicloud/cs\_kubernetes\_version.html.markdown at v1.173.0 · aliyun/terraform-provider-alicloud · GitHub
+terraform-provider-alicloud/cs\_kubernetes\_addon\_metadata.html.markdown at v1.173.0 · aliyun/terraform-provider-alicloud · GitHub
 
 [Skip to content](#start-of-content)
 
@@ -97,7 +97,7 @@ Jump to
 ↵
 
 
-[Sign in](/login?return_to=https%3A%2F%2Fgithub.com%2Faliyun%2Fterraform-provider-alicloud%2Fblob%2Fv1.173.0%2Fwebsite%2Fdocs%2Fd%2Fcs_kubernetes_version.html.markdown)
+[Sign in](/login?return_to=https%3A%2F%2Fgithub.com%2Faliyun%2Fterraform-provider-alicloud%2Fblob%2Fv1.173.0%2Fwebsite%2Fdocs%2Fd%2Fcs_kubernetes_addon_metadata.html.markdown)
 
 [Sign up](/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E%2Fblob%2Fshow&source=header-repo&source_repo=aliyun%2Fterraform-provider-alicloud)
 
@@ -128,7 +128,7 @@ More
 - [Security](/aliyun/terraform-provider-alicloud/security)
 - [Insights](/aliyun/terraform-provider-alicloud/pulse)
 
-[Permalink](/aliyun/terraform-provider-alicloud/blob/5651c2d752e81a14a712f8261bdc2b132d3a089b/website/docs/d/cs_kubernetes_version.html.markdown)
+[Permalink](/aliyun/terraform-provider-alicloud/blob/5651c2d752e81a14a712f8261bdc2b132d3a089b/website/docs/d/cs_kubernetes_addon_metadata.html.markdown)
 
 v1.173.0
 
@@ -140,17 +140,17 @@ Could not load branches
 
 Nothing to show
 
-[{{ refName }}default](https://github.com/aliyun/terraform-provider-alicloud/blob/{{ urlEncodedRefName }}/website/docs/d/cs_kubernetes_version.html.markdown)[View all branches](/aliyun/terraform-provider-alicloud/branches)
+[{{ refName }}default](https://github.com/aliyun/terraform-provider-alicloud/blob/{{ urlEncodedRefName }}/website/docs/d/cs_kubernetes_addon_metadata.html.markdown)[View all branches](/aliyun/terraform-provider-alicloud/branches)
 
 Could not load tags
 
 Nothing to show
 
-[{{ refName }}default](https://github.com/aliyun/terraform-provider-alicloud/blob/{{ urlEncodedRefName }}/website/docs/d/cs_kubernetes_version.html.markdown)
+[{{ refName }}default](https://github.com/aliyun/terraform-provider-alicloud/blob/{{ urlEncodedRefName }}/website/docs/d/cs_kubernetes_addon_metadata.html.markdown)
 
 [View all tags](/aliyun/terraform-provider-alicloud/tags)
 
-## [terraform-provider-alicloud](/aliyun/terraform-provider-alicloud/tree/v1.173.0)/[website](/aliyun/terraform-provider-alicloud/tree/v1.173.0/website)/[docs](/aliyun/terraform-provider-alicloud/tree/v1.173.0/website/docs)/[d](/aliyun/terraform-provider-alicloud/tree/v1.173.0/website/docs/d)/ **cs\_kubernetes\_version.html.markdown**
+## [terraform-provider-alicloud](/aliyun/terraform-provider-alicloud/tree/v1.173.0)/[website](/aliyun/terraform-provider-alicloud/tree/v1.173.0/website)/[docs](/aliyun/terraform-provider-alicloud/tree/v1.173.0/website/docs)/[d](/aliyun/terraform-provider-alicloud/tree/v1.173.0/website/docs/d)/ **cs\_kubernetes\_addon\_metadata.html.markdown**
 
 [Go to file](/aliyun/terraform-provider-alicloud/find/v1.173.0)
 
@@ -165,16 +165,16 @@ This commit does not belong to any branch on this repository, and may belong to 
 
 Cannot retrieve contributors at this time
 
-[alicloud\_cs\_kubernetes\_version](#alicloud_cs_kubernetes_version) [Example Usage](#example-usage) [Argument Reference](#argument-reference) [Attributes Reference](#attributes-reference)
+[alicloud\_cs\_kubernetes\_addon\_metadata](#alicloud_cs_kubernetes_addon_metadata) [Example Usage](#example-usage) [Argument Reference](#argument-reference) [Attributes Reference](#attributes-reference)
 
-81 lines (62 sloc)
+41 lines (31 sloc)
 
-2.48 KB
+1.41 KB
 
 
-[Display the source blob](/aliyun/terraform-provider-alicloud/blob/v1.173.0/website/docs/d/cs_kubernetes_version.html.markdown?plain=1)[Display the rendered blob](/aliyun/terraform-provider-alicloud/blob/v1.173.0/website/docs/d/cs_kubernetes_version.html.markdown)
+[Display the source blob](/aliyun/terraform-provider-alicloud/blob/v1.173.0/website/docs/d/cs_kubernetes_addon_metadata.html.markdown?plain=1)[Display the rendered blob](/aliyun/terraform-provider-alicloud/blob/v1.173.0/website/docs/d/cs_kubernetes_addon_metadata.html.markdown)
 
-[Raw](/aliyun/terraform-provider-alicloud/raw/v1.173.0/website/docs/d/cs_kubernetes_version.html.markdown) [Blame](/aliyun/terraform-provider-alicloud/blame/v1.173.0/website/docs/d/cs_kubernetes_version.html.markdown)
+[Raw](/aliyun/terraform-provider-alicloud/raw/v1.173.0/website/docs/d/cs_kubernetes_addon_metadata.html.markdown) [Blame](/aliyun/terraform-provider-alicloud/blame/v1.173.0/website/docs/d/cs_kubernetes_addon_metadata.html.markdown)
 
 Edit this file
 
@@ -182,8 +182,8 @@ E
 Open in GitHub Desktop
 
 
-- [View raw](/aliyun/terraform-provider-alicloud/raw/v1.173.0/website/docs/d/cs_kubernetes_version.html.markdown)
-- [View blame](/aliyun/terraform-provider-alicloud/blame/v1.173.0/website/docs/d/cs_kubernetes_version.html.markdown)
+- [View raw](/aliyun/terraform-provider-alicloud/raw/v1.173.0/website/docs/d/cs_kubernetes_addon_metadata.html.markdown)
+- [View blame](/aliyun/terraform-provider-alicloud/blame/v1.173.0/website/docs/d/cs_kubernetes_addon_metadata.html.markdown)
 
 subcategorylayoutpage\_titlesidebar\_currentdescription
 
@@ -191,82 +191,46 @@ Container Service for Kubernetes (ACK)
 
 alicloud
 
-Alicloud: alicloud\_cs\_kubernetes\_version
+Alicloud: alicloud\_cs\_kubernetes\_addon\_metadata
 
-docs-alicloud-datasource-cs-kubernetes-version
+docs-alicloud-datasource-cs-kubernetes-addon\_metadata
 
-Provides a data source to query the details of the Kubernetes version supported by ACK.
+Provide metadata of kubernetes cluster addons.
 
-# alicloud\_cs\_kubernetes\_version
+# alicloud\_cs\_kubernetes\_addon\_metadata
 
-This data source provides the details of the Kubernetes version supported by ACK.
+This data source provides metadata of kubernetes cluster addons.
 
--\> **NOTE:** Available in 1.170.0+.
+-\> **NOTE:** Available in 1.166.0+.
 
 ## Example Usage
 
 ```
-# Query the managed kubernetes cluster metadata of version 1.22.3-aliyun.1 in the region specified by the client.
-data "alicloud_cs_kubernetes_version" "default" {
-cluster_type = "ManagedKubernetes"
-version      = "1.22.3-aliyun.1"
-profile      = "Default"
-}
-output "metadata" {
-value = data.alicloud_cs_kubernetes_version.default.metadata
+data "alicloud_cs_kubernetes_addon_metadata" "default" {
+cluster_id = var.cluster_id
+name       = "nginx-ingress-controller"
+version    = "v1.1.2-aliyun.2"
 }
 
-# Query the kubernetes cluster metadata of version 1.22.3-aliyun.1 in the region specified by the client.
-data "alicloud_cs_kubernetes_version" "default" {
-cluster_type = "Kubernetes"
-version      = "1.22.3-aliyun.1"
-profile      = "Default"
+// Output addon configuration that can be customized
+output "addon_config_schema" {
+value = data.alicloud_cs_kubernetes_addons.default.config_schema
 }
-output "metadata" {
-value = data.alicloud_cs_kubernetes_version.default.metadata
-}
-
-# Query the serverless kubernetes cluster metadata of version 1.22.3-aliyun.1 in the region specified by the client.
-data "alicloud_cs_kubernetes_version" "default" {
-cluster_type = "ManagedKubernetes"
-version      = "1.22.3-aliyun.1"
-profile      = "Serverless"
-}
-output "metadata" {
-value = data.alicloud_cs_kubernetes_version.default.metadata
-}
-
-# Query the edge kubernetes cluster metadata of version 1.20.11-aliyunedge.1 in the region specified by the client.
-data "alicloud_cs_kubernetes_version" "default" {
-cluster_type = "ManagedKubernetes"
-version      = "1.20.11-aliyunedge.1"
-profile      = "Edge"
-}
-output "metadata" {
-value = data.alicloud_cs_kubernetes_version.default.metadata
-}
-
 ```
 
 ## Argument Reference
 
 The following arguments are supported.
 
-- `cluster_type` \- (Required) The type of cluster. Its valid value are `Kubernetes` and `ManagedKubernetes`.
-- `version` \- (Optional) The ACK released kubernetes version.
-- `profile` \- (Optional) The profile of cluster. Its valid value are `Default`, `Serverless` and `Edge`.
+- `cluster_id` \- (Required) The id of kubernetes cluster.
+- `name` \- (Required) The name of the cluster addon. You can get a list of available addons that the cluster can install by using data source `alicloud_cs_kubernetes_addons`.
+- `version` \- (Required) The version of the cluster addon.
 
 ## Attributes Reference
 
-The following attributes are exported.
+The following attributes are exported in addition to the arguments listed above:
 
-- `metadata` \- A list of metadata of kubernetes version.
-
-  - `version` \- The ACK released kubernetes version.
-  - `runtime` \- The list of supported runtime.
-
-    - `name` \- The runtime name.
-    - `version` \- The runtime version.
+- `config_schema` \- The addon configuration that can be customized. The returned format is the standard json schema. If return empty, it means that the addon does not support custom configuration yet.
 
 Go
 

@@ -21,16 +21,15 @@ const (
 	PARAMS      = "params"
 )
 
-type Resource struct {
-	Name       string
-	Arguments  map[string]interface{}
-	Attributes map[string]interface{}
+type Parsed struct {
+	Name      string
+	Arguments map[string]interface{}
 }
 
-// parseResource
-// resourceName - cs_kubernetes_version.md
+// ParseResource parse .md file to Resource struct.
+// resourceName - cs_kubernetes_version
 // todo: cancel attr regex
-func ParseResource(resourceName string) (*Resource, error) {
+func ParseResource(resourceName string) (*Parsed, error) {
 	filePath := strings.Join([]string{FILE_LOC_PREFIX, resourceName, ".md"}, "")
 	file, err := os.Open(filePath)
 	if err != nil {
@@ -39,15 +38,14 @@ func ParseResource(resourceName string) (*Resource, error) {
 	defer file.Close()
 
 	argsRegex := regexp.MustCompile(`## Argument Reference`)
-	attrRegex := regexp.MustCompile(`## Attributes Reference`)
+	// attrRegex := regexp.MustCompile(`## Attributes Reference`)
 	secondLevelRegex := regexp.MustCompile(`^#+`)
 	argumentsFieldRegex := regexp.MustCompile("^\\- `([a-zA-Z_0-9]*)`[ \\\\]*-? ?(\\(.*\\)) ?(.*)")
-	attributeFieldRegex := regexp.MustCompile("^\\- `([a-zA-Z_0-9]*)`[ \\\\]*-?(.*)")
+	// attributeFieldRegex := regexp.MustCompile("^\\- `([a-zA-Z_0-9]*)`[ \\\\]*-?(.*)")
 
-	result := &Resource{
-		Name:       resourceName,
-		Arguments:  map[string]interface{}{},
-		Attributes: map[string]interface{}{},
+	result := &Parsed{
+		Name:      resourceName,
+		Arguments: map[string]interface{}{},
 	}
 
 	scanner := bufio.NewScanner(file)
@@ -60,11 +58,11 @@ func ParseResource(resourceName string) (*Resource, error) {
 			phase = ARGUMENT
 			continue
 		}
-		if attrRegex.MatchString(line) {
-			record = true
-			phase = ATTRIBUTE
-			continue
-		}
+		//if attrRegex.MatchString(line) {
+		//	record = true
+		//	phase = ATTRIBUTE
+		//	continue
+		//}
 		if secondLevelRegex.MatchString(line) && strings.HasSuffix(line, PARAMS) {
 			record = true
 			continue
@@ -78,9 +76,10 @@ func ParseResource(resourceName string) (*Resource, error) {
 			var matched [][]string
 			if phase == ARGUMENT {
 				matched = argumentsFieldRegex.FindAllStringSubmatch(line, 1)
-			} else if phase == ATTRIBUTE {
-				matched = attributeFieldRegex.FindAllStringSubmatch(line, 1)
 			}
+			//} else if phase == ATTRIBUTE {
+			//	matched = attributeFieldRegex.FindAllStringSubmatch(line, 1)
+			//}
 
 			for _, m := range matched {
 				field := parseMatchLine(m, phase)
@@ -111,11 +110,11 @@ func parseMatchLine(words []string, phase string) map[string]interface{} {
 		return res
 	}
 
-	if phase == ATTRIBUTE && len(words) >= 3 {
-		res[NAME] = words[1]
-		res[DESCRIPTION] = words[2]
-		return res
-	}
+	//if phase == ATTRIBUTE && len(words) >= 3 {
+	//	res[NAME] = words[1]
+	//	res[DESCRIPTION] = words[2]
+	//	return res
+	//}
 	return nil
 }
 
