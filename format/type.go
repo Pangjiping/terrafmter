@@ -22,13 +22,13 @@ func validateType(r, d string) bool {
 	return true
 }
 
-func validateResource(r string) bool {
-	for k := range terraform.ResourceMap {
-		if k == r {
-			return true
+func validateResource(rs []string) (string, bool) {
+	for _, r := range rs {
+		if _, ok := terraform.ResourceMap[r]; !ok {
+			return r, false
 		}
 	}
-	return false
+	return "", true
 }
 
 func validateDataSource(d string) bool {
