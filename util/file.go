@@ -7,6 +7,11 @@ import (
 	"os"
 )
 
+const (
+	//FILE_LOC_PREFIX = "~/tmp/terrafmtter"
+	FILE_LOC_PREFIX = "../websiteDocs/"
+)
+
 // WriteToFile write data to filePath.
 func WriteToFile(filePath string, data interface{}) error {
 	var out string

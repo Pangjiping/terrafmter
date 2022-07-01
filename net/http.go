@@ -10,11 +10,6 @@ import (
 	"golang.org/x/net/html"
 )
 
-const (
-	//FILE_LOC_PREFIX = "~/tmp/terrafmtter"
-	FILE_LOC_PREFIX = ""
-)
-
 // GetDocFromGithubV2 fetch markdown doc from github.
 // It will be saved in a tmp dir.
 func GetDocFromGithubV2(version, file string, isResource bool) error {
@@ -32,7 +27,7 @@ func GetDocFromGithubV2(version, file string, isResource bool) error {
 		return err
 	}
 	h := node2html(doc)
-	filePath := fmt.Sprintf("%s%s-%s.md", FILE_LOC_PREFIX, file, version)
+	filePath := fmt.Sprintf("%s%s.md", util.FILE_LOC_PREFIX, file)
 	return util.ConvertHtml2Md(filePath, h)
 }
 

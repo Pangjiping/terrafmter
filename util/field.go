@@ -1,11 +1,110 @@
 package util
 
 import (
+	"bufio"
 	"github.com/waigani/diffparser"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
 )
+
+type Resource struct {
+	Name       string
+	Arguments  map[string]interface{}
+	Attributes map[string]interface{}
+}
+
+// parseResource
+// resourceName - cs_kubernetes_version.md
+func parseResource(resourceName string) (*Resource, error) {
+	filePath := strings.Join([]string{FILE_LOC_PREFIX, resourceName, ".md"}, "")
+	file, err := os.Open(filePath)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	argsRegex := regexp.MustCompile(`## Argument Reference`)
+	attrRegex := regexp.MustCompile(`## Attributes Reference`)
+	secondLevelRegex := regexp.MustCompile(`^#+`)
+	argumentsFieldRegex := regexp.MustCompile("^\\* `([a-zA-Z_0-9]*)`[ ]*-? ?(\\(.*\\)) ?(.*)")
+	attributeFieldRegex := regexp.MustCompile("^\\* `([a-zA-Z_0-9]*)`[ ]*-?(.*)")
+
+	result := &Resource{
+		Name:       resourceName,
+		Arguments:  map[string]interface{}{},
+		Attributes: map[string]interface{}{},
+	}
+
+	scanner := bufio.NewScanner(file)
+	phase := "Argument"
+	record := false
+	for scanner.Scan() {
+		line := scanner.Text()
+		if argsRegex.MatchString(line) {
+			record = true
+			phase = "Argument"
+			continue
+		}
+		if attrRegex.MatchString(line) {
+			record = true
+			phase = "Attribute"
+			continue
+		}
+		if secondLevelRegex.MatchString(line) && strings.HasSuffix(line, "params") {
+			record = true
+			continue
+		}
+
+		if record {
+			if secondLevelRegex.MatchString(line) && !strings.HasSuffix(line, "params") {
+				record = false
+				continue
+			}
+			var matched [][]string
+			if phase == "Argument" {
+				matched = argumentsFieldRegex.FindAllStringSubmatch(line, 1)
+			} else if phase == "Attribute" {
+				matched = attributeFieldRegex.FindAllStringSubmatch(line, 1)
+			}
+
+			for _, m := range matched {
+				field := parseMatchLine(m, phase)
+				field["Type"] = phase
+				if v, exist := field["Name"]; exist {
+					result.Arguments[v.(string)] = field
+				}
+			}
+		}
+	}
+	return result, nil
+}
+
+func parseMatchLine(words []string, phase string) map[string]interface{} {
+	res := make(map[string]interface{}, 0)
+	if phase == "Argument" && len(words) >= 4 {
+		res["Name"] = words[1]
+		res["Description"] = words[3]
+		if strings.Contains(words[2], "Optional") {
+			res["Optional"] = true
+		}
+		if strings.Contains(words[2], "Required") {
+			res["Required"] = true
+		}
+		if strings.Contains(words[2], "ForceNew") {
+			res["ForceNew"] = true
+		}
+		return res
+	}
+
+	if phase == "Attribute" && len(words) >= 3 {
+		res["Name"] = words[1]
+		res["Description"] = words[2]
+		return res
+	}
+	return nil
+}
 
 func ParseField(hunk diffparser.DiffRange, length int) map[string]map[string]interface{} {
 	schemaRegex := regexp.MustCompile("^\\t*\"([a-zA-Z_]*)\"")
