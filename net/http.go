@@ -15,53 +15,6 @@ const (
 	FILE_LOC_PREFIX = ""
 )
 
-// GetCodeFromGithub fetch html page from alicloud provider github.
-// Then clean html page and parse it to string.
-// Deprecated
-func GetCodeFromGithub(version, file string) (string, error) {
-	resp, err := http.Get(getHttpAddr(version, file))
-	if err != nil {
-		return "", err
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		return "", fmt.Errorf("http server error, status code is %v", resp.StatusCode)
-	}
-
-	// parse html
-	doc, err := html.Parse(resp.Body)
-	if err != nil {
-		return "", err
-	}
-
-	clear_dom(doc, false)
-	str := node2text(doc)
-	return str, nil
-}
-
-// GetDocFromGithub fetch html page from alicloud provider docs.
-// Then clean html and parse it to string.
-func GetDocFromGithub(version, file string, isResource bool) (string, error) {
-	resp, err := http.Get(getHttpAddrV2(version, file, isResource))
-	if err != nil {
-		return "", err
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		return "", fmt.Errorf("http server error, status code is %v", resp.StatusCode)
-	}
-
-	// parse html
-	doc, err := html.Parse(resp.Body)
-	if err != nil {
-		return "", err
-	}
-
-	clear_dom(doc, false)
-	str := node2text(doc)
-	return str, nil
-}
-
 // GetDocFromGithubV2 fetch markdown doc from github.
 // It will be saved in a tmp dir.
 func GetDocFromGithubV2(version, file string, isResource bool) error {
@@ -158,4 +111,52 @@ func node2text(node *html.Node) string {
 		return buf.String()
 	}
 	return ""
+}
+
+// GetCodeFromGithub fetch html page from alicloud provider github.
+// Then clean html page and parse it to string.
+// Deprecated
+func GetCodeFromGithub(version, file string) (string, error) {
+	resp, err := http.Get(getHttpAddr(version, file))
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return "", fmt.Errorf("http server error, status code is %v", resp.StatusCode)
+	}
+
+	// parse html
+	doc, err := html.Parse(resp.Body)
+	if err != nil {
+		return "", err
+	}
+
+	clear_dom(doc, false)
+	str := node2text(doc)
+	return str, nil
+}
+
+// GetDocFromGithub fetch html page from alicloud provider docs.
+// Then clean html and parse it to string.
+// Deprecated
+func GetDocFromGithub(version, file string, isResource bool) (string, error) {
+	resp, err := http.Get(getHttpAddrV2(version, file, isResource))
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return "", fmt.Errorf("http server error, status code is %v", resp.StatusCode)
+	}
+
+	// parse html
+	doc, err := html.Parse(resp.Body)
+	if err != nil {
+		return "", err
+	}
+
+	clear_dom(doc, false)
+	str := node2text(doc)
+	return str, nil
 }
