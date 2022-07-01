@@ -27,7 +27,7 @@ func NewResource(version string, rs []string) (*Resource, error) {
 		err    error
 	)
 
-	r, valid := validateResource(rs)
+	r, valid := util.ValidateResource(rs)
 	if !valid {
 		return nil, fmt.Errorf("invalid resource type: %s", r)
 	}

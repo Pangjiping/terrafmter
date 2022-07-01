@@ -6,6 +6,12 @@ import (
 	"strings"
 )
 
+// source and data
+const (
+	DATA     = "data"
+	RESOURCE = "resource"
+)
+
 type SchemaMapping struct {
 	Type    string  // like data and resource
 	Name    string  // like cs_kubernetes, cs_managed_kubernetes

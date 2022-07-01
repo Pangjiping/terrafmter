@@ -1,7 +1,5 @@
 package format
 
-import "github.com/Pangjiping/terrafmtter/terraform"
-
 const (
 	EMPTY = "nil"
 
@@ -10,10 +8,6 @@ const (
 	SECRET_KEY     = "ALICLOUD_SECRET_KEY"
 	REGION         = "ALICLOUD_REGION"
 	DEFAULT_REGION = "cn-hangzhou"
-
-	// source and data
-	DATA     = "data"
-	RESOURCE = "resource"
 )
 
 // validateType 检查resource和data不能同时设置，也不能都不设置
@@ -24,24 +18,6 @@ func validateType(r, d string) bool {
 		return false
 	}
 	return true
-}
-
-func validateResource(rs []string) (string, bool) {
-	for _, r := range rs {
-		if _, ok := terraform.ResourceMap[r]; !ok {
-			return r, false
-		}
-	}
-	return "", true
-}
-
-func validateDataSource(ds []string) (string, bool) {
-	for _, d := range ds {
-		if _, ok := terraform.DataSourceMap[d]; !ok {
-			return d, false
-		}
-	}
-	return "", true
 }
 
 type response struct {
