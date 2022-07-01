@@ -31,12 +31,6 @@ func GetDocFromGithubV2(version, file string, isResource bool) error {
 	return util.ConvertHtml2Md(filePath, h)
 }
 
-// getHttpAddr build http url to go code.
-// Deprecated
-func getHttpAddr(version, file string) string {
-	return fmt.Sprintf(`https://github.com/aliyun/terraform-provider-alicloud/blob/v%s/alicloud/%s`, version, file)
-}
-
 // getHttpAddrV2 build http url to markdown.
 func getHttpAddrV2(version, file string, isResource bool) string {
 	if isResource {
@@ -154,4 +148,10 @@ func GetDocFromGithub(version, file string, isResource bool) (string, error) {
 	clear_dom(doc, false)
 	str := node2text(doc)
 	return str, nil
+}
+
+// getHttpAddr build http url to go code.
+// Deprecated
+func getHttpAddr(version, file string) string {
+	return fmt.Sprintf(`https://github.com/aliyun/terraform-provider-alicloud/blob/v%s/alicloud/%s`, version, file)
 }

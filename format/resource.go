@@ -85,7 +85,7 @@ func (r *Resource) initRegex() error {
 // todo: more simple?
 func (r *Resource) scan() error {
 	for _, re := range r.names {
-		resourceName := strings.Join([]string{"alicloud_cs_", re}, "")
+		resourceName := strings.Join([]string{"alicloud_", re}, "")
 		r.Fields[resourceName] = make(map[string]interface{})
 		res, err := util.ParseResource(re)
 		if err != nil {
