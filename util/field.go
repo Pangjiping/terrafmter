@@ -9,6 +9,18 @@ import (
 	"strings"
 )
 
+const (
+	NAME        = "Name"
+	ARGUMENT    = "Argument"
+	ATTRIBUTE   = "Attribute"
+	OPTIONAL    = "Optional"
+	FORCENEW    = "ForceNew"
+	REQUIRED    = "Required"
+	TYPE        = "Type"
+	DESCRIPTION = "Description"
+	PARAMS      = "params"
+)
+
 type Resource struct {
 	Name       string
 	Arguments  map[string]interface{}
@@ -38,41 +50,41 @@ func parseResource(resourceName string) (*Resource, error) {
 	}
 
 	scanner := bufio.NewScanner(file)
-	phase := "Argument"
+	phase := ARGUMENT
 	record := false
 	for scanner.Scan() {
 		line := scanner.Text()
 		if argsRegex.MatchString(line) {
 			record = true
-			phase = "Argument"
+			phase = ARGUMENT
 			continue
 		}
 		if attrRegex.MatchString(line) {
 			record = true
-			phase = "Attribute"
+			phase = ATTRIBUTE
 			continue
 		}
-		if secondLevelRegex.MatchString(line) && strings.HasSuffix(line, "params") {
+		if secondLevelRegex.MatchString(line) && strings.HasSuffix(line, PARAMS) {
 			record = true
 			continue
 		}
 
 		if record {
-			if secondLevelRegex.MatchString(line) && !strings.HasSuffix(line, "params") {
+			if secondLevelRegex.MatchString(line) && !strings.HasSuffix(line, PARAMS) {
 				record = false
 				continue
 			}
 			var matched [][]string
-			if phase == "Argument" {
+			if phase == ARGUMENT {
 				matched = argumentsFieldRegex.FindAllStringSubmatch(line, 1)
-			} else if phase == "Attribute" {
+			} else if phase == ATTRIBUTE {
 				matched = attributeFieldRegex.FindAllStringSubmatch(line, 1)
 			}
 
 			for _, m := range matched {
 				field := parseMatchLine(m, phase)
-				field["Type"] = phase
-				if v, exist := field["Name"]; exist {
+				field[TYPE] = phase
+				if v, exist := field[NAME]; exist {
 					result.Arguments[v.(string)] = field
 				}
 			}
@@ -83,24 +95,24 @@ func parseResource(resourceName string) (*Resource, error) {
 
 func parseMatchLine(words []string, phase string) map[string]interface{} {
 	res := make(map[string]interface{}, 0)
-	if phase == "Argument" && len(words) >= 4 {
-		res["Name"] = words[1]
-		res["Description"] = words[3]
-		if strings.Contains(words[2], "Optional") {
-			res["Optional"] = true
+	if phase == ARGUMENT && len(words) >= 4 {
+		res[NAME] = words[1]
+		res[DESCRIPTION] = words[3]
+		if strings.Contains(words[2], OPTIONAL) {
+			res[OPTIONAL] = true
 		}
-		if strings.Contains(words[2], "Required") {
-			res["Required"] = true
+		if strings.Contains(words[2], REQUIRED) {
+			res[REQUIRED] = true
 		}
-		if strings.Contains(words[2], "ForceNew") {
-			res["ForceNew"] = true
+		if strings.Contains(words[2], FORCENEW) {
+			res[FORCENEW] = true
 		}
 		return res
 	}
 
-	if phase == "Attribute" && len(words) >= 3 {
-		res["Name"] = words[1]
-		res["Description"] = words[2]
+	if phase == ATTRIBUTE && len(words) >= 3 {
+		res[NAME] = words[1]
+		res[DESCRIPTION] = words[2]
 		return res
 	}
 	return nil
