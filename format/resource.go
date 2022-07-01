@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+	"strings"
 
 	"github.com/Pangjiping/terrafmtter/net"
 	"github.com/Pangjiping/terrafmtter/terraform"
@@ -81,7 +82,16 @@ func (r *Resource) initRegex() error {
 	return nil
 }
 
-// todo: scan .md and parse field to r.Fields
+// todo: more simple?
 func (r *Resource) scan() error {
+	for _, re := range r.names {
+		resourceName := strings.Join([]string{"alicloud_cs_", re}, "")
+		r.Fields[resourceName] = make(map[string]interface{})
+		res, err := util.ParseResource(re)
+		if err != nil {
+			return err
+		}
+		r.Fields[resourceName] = res.Arguments
+	}
 	return nil
 }
