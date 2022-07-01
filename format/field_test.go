@@ -1,4 +1,4 @@
-package util
+package format
 
 import (
 	"fmt"
@@ -24,7 +24,7 @@ func TestParseResource(t *testing.T) {
 		"Wanted": true,
 	}
 	for _, r := range testcase["Resources"].([]string) {
-		res, err := ParseResource(r)
+		res, err := parseResource(r)
 		assert.Equal(t, []interface{}{
 			err == nil,
 			res != nil,

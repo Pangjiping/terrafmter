@@ -28,7 +28,7 @@ var (
 
 func mockResource(resource []string) *Resource {
 	return &Resource{
-		names:   resource,
+		Names:   resource,
 		Region:  region,
 		version: version,
 		Fields:  make(map[string]map[string]interface{}),

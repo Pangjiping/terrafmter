@@ -120,11 +120,11 @@ func (r *Resource) scan() error {
 	for _, re := range r.Names {
 		resourceName := strings.Join([]string{"alicloud_", re}, "")
 		r.Fields[resourceName] = make(map[string]interface{})
-		res, err := util.ParseResource(re)
+		res, err := parseResource(re)
 		if err != nil {
 			return err
 		}
-		r.Fields[resourceName] = res.Arguments
+		r.Fields[resourceName] = res.arguments
 	}
 	return nil
 }

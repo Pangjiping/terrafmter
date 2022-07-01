@@ -95,11 +95,11 @@ func (d *DataSource) scan() error {
 	for _, da := range d.Names {
 		dataSourceName := strings.Join([]string{"alicloud_", da}, "")
 		d.Fields[dataSourceName] = make(map[string]interface{})
-		res, err := util.ParseResource(da)
+		res, err := parseResource(da)
 		if err != nil {
 			return err
 		}
-		d.Fields[dataSourceName] = res.Arguments
+		d.Fields[dataSourceName] = res.arguments
 	}
 	return nil
 }
