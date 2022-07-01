@@ -5,7 +5,11 @@ import (
 	"fmt"
 	"github.com/Pangjiping/terrafmtter/format"
 	"github.com/Pangjiping/terrafmtter/util"
+	"io/ioutil"
+	"os"
+	"path"
 	"sync"
+	"text/template"
 )
 
 //go:embed templates/*
@@ -38,9 +42,10 @@ func Execute(resources, datas []string, fileName, version string) error {
 		return err
 	}
 
-	// 渲染模版文件
-
-	// 写文件
+	// write to target file
+	if err := renderFile(); err != nil {
+		return err
+	}
 
 	return nil
 }
@@ -93,6 +98,25 @@ func formatMapping(resources, datas []string, version string) error {
 		case <-respChan:
 			total--
 		}
+	}
+	return nil
+}
+
+func renderFile() error {
+	workDir, _ := ioutil.TempDir("", "terraform")
+	tpl, err := template.New("").Parse(terraformBaseTemplate)
+	if err != nil {
+		return err
+	}
+
+	f, err := os.OpenFile(path.Join(workDir, "main.tf"), os.O_WRONLY|os.O_CREATE, 0644)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	if err = tpl.Execute(f, mappings); err != nil {
+		return err
 	}
 	return nil
 }

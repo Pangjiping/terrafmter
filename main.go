@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"github.com/Pangjiping/terrafmtter/gen"
 	"os"
 
 	"github.com/Pangjiping/terrafmtter/util"
@@ -30,24 +31,14 @@ func main() {
 	resources := util.ConvertString2slice(*resource, ",")
 	datas := util.ConvertString2slice(*data, ",")
 
-	if err := Run(resources, datas, *file, *version); err != nil {
+	if err = Run(resources, datas, *file, *version); err != nil {
 		log.Fatal().Err(err).Msg("parse terraform templates error")
 	}
 }
 
 func Run(resources []string, datas []string, filename, version string) error {
-	file, err := os.Open(filename)
-	if err != nil {
+	if err := gen.Execute(resources, datas, filename, version); err != nil {
 		return err
 	}
-	defer file.Close()
-
-	//s, err := format.Parse(r, d, filename, saved)
-	//if err != nil {
-	//	return err
-	//}
-	//if err := gen.Execute(s, os.Stdout); err != nil {
-	//	return err
-	//}
 	return nil
 }
