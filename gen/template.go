@@ -26,7 +26,7 @@ variable "default" {
     {{ range .Fields}}
 		{{range .Description}}
 	# Description: {{.}}
-		{{end}}
+		{{- end -}}
     # It's {{ .OptOrReq}}
     # ForceNew: {{ .ForceNew}}
     {{ .Name}} = "TODO" 
