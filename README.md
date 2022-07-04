@@ -59,16 +59,16 @@ variable "default" {
 # [TODO] PLEASE EDIT.
 # Details in https://registry.terraform.io/providers/aliyun/alicloud/1.173.0/docs/data-sources/cs_kubernetes_version
 data "alicloud_cs_kubernetes_version" "default" {
-    
-	# It's Required.
-	# Details in https://registry.terraform.io/providers/aliyun/alicloud/1.173.0/docs/data-sources/cs_kubernetes_version#cluster_type
-    cluster_type = "TODO"
-	# It's Optional.
-	# Details in https://registry.terraform.io/providers/aliyun/alicloud/1.173.0/docs/data-sources/cs_kubernetes_version#version
-    version = "TODO"
-	# It's Optional.
-	# Details in https://registry.terraform.io/providers/aliyun/alicloud/1.173.0/docs/data-sources/cs_kubernetes_version#profile
-    profile = "TODO"
+
+  # Details in https://registry.terraform.io/providers/aliyun/alicloud/1.173.0/docs/data-sources/cs_kubernetes_version#cluster_type
+  cluster_type = "TODO"
+
+  # Details in https://registry.terraform.io/providers/aliyun/alicloud/1.173.0/docs/data-sources/cs_kubernetes_version#version
+  version = "TODO"
+
+  # Details in https://registry.terraform.io/providers/aliyun/alicloud/1.173.0/docs/data-sources/cs_kubernetes_version#profile
+  profile = "TODO"
+
 }
 ```
 
@@ -77,5 +77,7 @@ data "alicloud_cs_kubernetes_version" "default" {
 - setting default value.
 - cleanup files.
 - more product support.
+- tracing.
+- group by parameters.
 
 
