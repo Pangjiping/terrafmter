@@ -75,5 +75,6 @@ data "alicloud_cs_kubernetes_version" "default" {
 - setting default value.
 - more product support.
 - group by parameters.
+- optimize optional and required.
 
 
