@@ -14,4 +14,5 @@ mac:
 copy:
 	tar -xvf bin/terrafmtter_darwin-amd64.tgz
 	mv bin/terrafmtter /usr/local/bin
+	mkdir -p /tmp/terrafmtter
 	

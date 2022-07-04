@@ -9,7 +9,7 @@ import (
 
 const (
 	//FILE_LOC_PREFIX = "~/tmp/terrafmtter"
-	FILE_LOC_PREFIX = "../websiteDocs/"
+	FILE_LOC_PREFIX = "/tmp/terrafmtter/"
 )
 
 // WriteToFile write data to filePath.
@@ -34,5 +34,5 @@ func WriteToFile(filePath string, data interface{}) error {
 			return err
 		}
 	}
-	return ioutil.WriteFile(filePath, String2Bytes(out), 0677)
+	return ioutil.WriteFile(filePath, String2Bytes(out), 0422)
 }

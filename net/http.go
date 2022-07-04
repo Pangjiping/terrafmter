@@ -52,18 +52,12 @@ func clear_dom(pn *html.Node, isgb2312 bool) error {
 				pn.RemoveChild(tmp)
 			} else if tn == "a" {
 				nd = nd.NextSibling
-				//if err = convert_dom(tmp, isgb2312); err != nil {
-				//	return err
-				//}
 			} else if tn == "span" {
 				tmp := nd
 				nd = nd.NextSibling
 				clear_dom(tmp, isgb2312)
 			} else {
 				nd = nd.NextSibling
-				//if err = convert_dom(tmp, isgb2312); err != nil {
-				//	return err
-				//}
 			}
 		case html.CommentNode:
 			tmp := nd
@@ -71,9 +65,6 @@ func clear_dom(pn *html.Node, isgb2312 bool) error {
 			pn.RemoveChild(tmp)
 		case html.TextNode:
 			nd = nd.NextSibling
-			//if err = convert_dom(tmp, isgb2312); err != nil {
-			//	return err
-			//}
 		default:
 			nd = nd.NextSibling
 		}
