@@ -1,5 +1,6 @@
 # terrafmter
 terraform code generation tool for Alibaba Cloud Container Service for Kubernetes.
+It's only for MacOS.
 
 ## Requirements
 - GoLang version 1.17+
@@ -8,7 +9,7 @@ terraform code generation tool for Alibaba Cloud Container Service for Kubernete
 
 
 ## Install
-You could install this tool by `git`
+You could install this tool by `git`.
 ```shell
 mkdir -p $GOPATH/src/github.com/Pangjiping
 cd $GOPATH/src/github.com/Pangjiping
