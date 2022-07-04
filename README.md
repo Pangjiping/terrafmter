@@ -1,4 +1,4 @@
-# terrafmter
+# terrafmtter
 [![OSCS Status](https://www.oscs1024.com/platform/badge/Pangjiping/terrafmtter.svg?size=small)](https://www.oscs1024.com/project/Pangjiping/terrafmtter?ref=badge_small)
 
 terraform code generation tool for Alibaba Cloud Container Service for Kubernetes.
