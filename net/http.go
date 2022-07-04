@@ -10,6 +10,8 @@ import (
 	"golang.org/x/net/html"
 )
 
+const latest = "latest"
+
 // GetDocFromGithubV2 fetch markdown doc from github.
 // It will be saved in a tmp dir.
 func GetDocFromGithubV2(version, file string, isResource bool) error {
@@ -34,9 +36,17 @@ func GetDocFromGithubV2(version, file string, isResource bool) error {
 // getHttpAddrV2 build http url to markdown.
 func getHttpAddrV2(version, file string, isResource bool) string {
 	if isResource {
-		return fmt.Sprintf(`https://github.com/aliyun/terraform-provider-alicloud/blob/v%s/website/docs/r/%s.html.markdown`, version, file)
+		if version == latest {
+			return fmt.Sprintf(`https://github.com/aliyun/terraform-provider-alicloud/blob/master/website/docs/r/%s.html.markdown`, file)
+		} else {
+			return fmt.Sprintf(`https://github.com/aliyun/terraform-provider-alicloud/blob/v%s/website/docs/r/%s.html.markdown`, version, file)
+		}
 	} else {
-		return fmt.Sprintf(`https://github.com/aliyun/terraform-provider-alicloud/blob/v%s/website/docs/d/%s.html.markdown`, version, file)
+		if version == latest {
+			return fmt.Sprintf(`https://github.com/aliyun/terraform-provider-alicloud/blob/master/website/docs/d/%s.html.markdown`, file)
+		} else {
+			return fmt.Sprintf(`https://github.com/aliyun/terraform-provider-alicloud/blob/v%s/website/docs/d/%s.html.markdown`, version, file)
+		}
 	}
 }
 

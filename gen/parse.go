@@ -24,13 +24,22 @@ func Execute(resources, datas []string, fileName, version string) error {
 	// valid product
 
 	// valid data and resource
-	r, ok := util.ValidateResource(resources)
-	if !ok {
-		return fmt.Errorf("Invalid resource type: %s", r)
+	if len(resources) == 1 && resources[0] == "nil" {
+		resources = make([]string, 0)
+	} else {
+		r, ok := util.ValidateResource(resources)
+		if !ok {
+			return fmt.Errorf("Invalid resource type: %s", r)
+		}
 	}
-	d, ok := util.ValidateDataSource(datas)
-	if !ok {
-		return fmt.Errorf("Invalid data source type: %s", d)
+
+	if len(datas) == 1 && datas[0] == "nil" {
+		datas = make([]string, 0)
+	} else {
+		d, ok := util.ValidateDataSource(datas)
+		if !ok {
+			return fmt.Errorf("Invalid data source type: %s", d)
+		}
 	}
 
 	// schemaMapping format
@@ -39,7 +48,7 @@ func Execute(resources, datas []string, fileName, version string) error {
 	}
 
 	// write to target file
-	if err := renderFile(); err != nil {
+	if err := renderFile(fileName); err != nil {
 		return err
 	}
 
@@ -100,7 +109,7 @@ func formatMapping(resources, datas []string, version string) error {
 	return nil
 }
 
-func renderFile() error {
+func renderFile(filePath string) error {
 	// the name inc is what the function will be called in the template text.
 	funcMap := template.FuncMap{
 		"inc": func(i int) int {
@@ -113,7 +122,7 @@ func renderFile() error {
 		return err
 	}
 
-	f, err := os.OpenFile("main.tf", os.O_WRONLY|os.O_CREATE, 0644)
+	f, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE, 0644)
 	if err != nil {
 		return err
 	}
