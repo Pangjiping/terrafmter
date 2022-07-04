@@ -82,7 +82,7 @@ data "alicloud_cs_kubernetes_version" "default" {
 ## TODOs
 - template enhancement.
 - setting default value.
-- more product support.
+- more product support. [ing, unavailable now].
 - group by parameters.
 - optimize optional and required.
 
