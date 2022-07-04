@@ -1,9 +1,15 @@
 # terrafmtter
 [![OSCS Status](https://www.oscs1024.com/platform/badge/Pangjiping/terrafmtter.svg?size=small)](https://www.oscs1024.com/project/Pangjiping/terrafmtter?ref=badge_small)
 
-terraform code generation tool for Alibaba Cloud Container Service for Kubernetes. 
+terraform code generation tool for Alibaba Cloud Container Service for Kubernetes.
 
-**It's only for MacOS now.**
+- This tool will be compatible with all the latest terraform services of Alicloud. 
+- The latest provider in [terraform-provider-alicloud](https://registry.terraform.io/providers/aliyun/alicloud/latest).
+- The github repo in [terraform-provider-alicloud](https://github.com/aliyun/terraform-provider-alicloud)
+
+
+**NOTE:**
+- It's only for MacOS now.
 
 ## Requirements
 - GoLang version 1.17+
