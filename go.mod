@@ -3,6 +3,7 @@ module github.com/Pangjiping/terrafmtter
 go 1.17
 
 require (
+	github.com/JohannesKaufmann/html-to-markdown v1.3.4
 	github.com/peterbourgon/ff v1.7.1
 	github.com/rs/zerolog v1.27.0
 	github.com/stretchr/testify v1.8.0
@@ -11,7 +12,6 @@ require (
 )
 
 require (
-	github.com/JohannesKaufmann/html-to-markdown v1.3.4 // indirect
 	github.com/PuerkitoBio/goquery v1.5.1 // indirect
 	github.com/andybalholm/cascadia v1.1.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
