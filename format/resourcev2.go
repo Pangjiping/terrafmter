@@ -3,6 +3,10 @@ package format
 import (
 	"fmt"
 	"github.com/Pangjiping/terrafmtter/net"
+	"github.com/Pangjiping/terrafmtter/util"
+	"io/ioutil"
+	"os"
+	"path"
 	"strings"
 )
 
@@ -54,6 +58,10 @@ func (sm *SchemaMapping) Format() error {
 }
 
 func (sm *SchemaMapping) cleanup() {
+	dir, _ := ioutil.ReadDir(util.FILE_LOC_PREFIX)
+	for _, d := range dir {
+		os.RemoveAll(path.Join([]string{util.FILE_LOC_PREFIX, d.Name()}...))
+	}
 }
 
 func (sm *SchemaMapping) scan() error {

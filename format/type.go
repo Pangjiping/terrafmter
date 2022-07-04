@@ -8,9 +8,6 @@ const (
 	SECRET_KEY     = "ALICLOUD_SECRET_KEY"
 	REGION         = "ALICLOUD_REGION"
 	DEFAULT_REGION = "cn-hangzhou"
-
-	// version
-	LATEST = "latest"
 )
 
 // validateType 检查resource和data不能同时设置，也不能都不设置

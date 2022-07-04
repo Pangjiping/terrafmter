@@ -32,3 +32,8 @@ func TestSchemaMapping_Format(t *testing.T) {
 	assert.NotNil(t, schemaMapping2.Fields[0])
 	fmt.Println(schemaMapping2.Fields)
 }
+
+func TestSchemaMapping_Cleanup(t *testing.T) {
+	schemaMapping := NewSchemaMapping("1.173.0", "data", "kubernetes_version")
+	schemaMapping.cleanup()
+}

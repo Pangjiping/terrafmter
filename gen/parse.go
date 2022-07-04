@@ -24,7 +24,7 @@ func Execute(resources, datas []string, fileName, version string) error {
 	// valid product
 
 	// valid data and resource
-	if len(resources) == 1 && resources[0] == "nil" {
+	if len(resources) == 1 && resources[0] == format.EMPTY {
 		resources = make([]string, 0)
 	} else {
 		r, ok := util.ValidateResource(resources)
@@ -33,7 +33,7 @@ func Execute(resources, datas []string, fileName, version string) error {
 		}
 	}
 
-	if len(datas) == 1 && datas[0] == "nil" {
+	if len(datas) == 1 && datas[0] == format.EMPTY {
 		datas = make([]string, 0)
 	} else {
 		d, ok := util.ValidateDataSource(datas)
