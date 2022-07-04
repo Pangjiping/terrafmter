@@ -2,9 +2,8 @@ package format
 
 import (
 	"fmt"
-	"strings"
-
 	"github.com/Pangjiping/terrafmtter/net"
+	"strings"
 )
 
 // source and data
@@ -15,18 +14,20 @@ const (
 )
 
 type SchemaMapping struct {
-	Type    string  // like data and resource
-	Name    string  // like cs_kubernetes, cs_managed_kubernetes
-	Version string  // like 1.173.0
-	Url     string  // doc url from hashicorp
-	Fields  []Field // schema
+	Type    string  `json:"type"`    // like data and resource
+	Name    string  `json:"name"`    // like cs_kubernetes, cs_managed_kubernetes
+	Version string  `json:"version"` // like 1.173.0
+	Url     string  `json:"url"`     // doc url from hashicorp
+	Fields  []Field `json:"fields"`  // schema
 }
 
 type Field struct {
-	Name        string
-	Description []string // description need to split by .
-	OptOrReq    string
-	ForceNew    bool
+	Name        string   `json:"name"`
+	Description []string `json:"description"` // description need to split by .
+	Optional    bool     `json:"optional"`
+	Required    bool     `json:"required"`
+	ForceNew    bool     `json:"force_new"`
+	Detail      string   `json:"detail"` // details url
 }
 
 // NewSchemaMapping get SchemaMapping
@@ -87,11 +88,14 @@ func (sm *SchemaMapping) convertParsed2Fields(prev *parsed) error {
 	field := Field{}
 	for k1, v1 := range prev.arguments {
 		field.Name = k1
+		field.Detail = strings.Join([]string{sm.Url, field.Name}, "#")
+
+		// handle property
 		for k2, v2 := range v1 {
 			switch k2 {
 			case OPTIONAL:
 				if v2 == "true" {
-					field.OptOrReq = OPTIONAL
+					field.Optional = true
 				}
 			case FORCENEW:
 				if v2 == "true" {
@@ -99,14 +103,12 @@ func (sm *SchemaMapping) convertParsed2Fields(prev *parsed) error {
 				}
 			case REQUIRED:
 				if v2 == "true" {
-					field.OptOrReq = REQUIRED
+					field.Required = true
 				}
-			case DESCRIPTION:
-				descriptions := strings.Split(v2, ".")
-				field.Description = descriptions[0 : len(descriptions)-2]
 			default:
 			}
 		}
+
 		sm.Fields = append(sm.Fields, field)
 	}
 	return nil

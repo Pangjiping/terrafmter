@@ -101,7 +101,6 @@ func formatMapping(resources, datas []string, version string) error {
 }
 
 func renderFile() error {
-
 	// the name inc is what the function will be called in the template text.
 	funcMap := template.FuncMap{
 		"inc": func(i int) int {
