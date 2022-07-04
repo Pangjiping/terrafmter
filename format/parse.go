@@ -24,7 +24,7 @@ const (
 
 type parsed struct {
 	name      string
-	arguments map[string]map[string]string
+	arguments []map[string]string
 }
 
 // parseResource parse .md file to parsed struct.
@@ -45,7 +45,7 @@ func parseResource(resourceName string) (*parsed, error) {
 
 	result := &parsed{
 		name:      resourceName,
-		arguments: map[string]map[string]string{},
+		arguments: make([]map[string]string, 0),
 	}
 
 	scanner := bufio.NewScanner(file)
@@ -76,8 +76,8 @@ func parseResource(resourceName string) (*parsed, error) {
 			for _, m := range matched {
 				field := parseMatchLine(m, phase)
 				field[TYPE] = phase
-				if v, exist := field[NAME]; exist {
-					result.arguments[v] = field
+				if _, exist := field[NAME]; exist {
+					result.arguments = append(result.arguments, field)
 				}
 			}
 		}
@@ -99,8 +99,6 @@ func parseMatchLine(words []string, phase string) map[string]string {
 		if strings.Contains(words[2], FORCENEW) {
 			res[FORCENEW] = "true"
 		}
-
-		// todo: get default
 
 		return res
 	}

@@ -94,8 +94,8 @@ func (sm *SchemaMapping) getDocs() error {
 
 func (sm *SchemaMapping) convertParsed2Fields(prev *parsed) error {
 	field := Field{}
-	for k1, v1 := range prev.arguments {
-		field.Name = k1
+	for _, v1 := range prev.arguments {
+		field.Name = v1[NAME]
 		field.Detail = strings.Join([]string{sm.Url, field.Name}, "#")
 
 		// handle property
@@ -116,7 +116,6 @@ func (sm *SchemaMapping) convertParsed2Fields(prev *parsed) error {
 			default:
 			}
 		}
-
 		sm.Fields = append(sm.Fields, field)
 	}
 	return nil
