@@ -82,8 +82,7 @@ data "alicloud_cs_kubernetes_version" "default" {
 ## TODOs
 - template enhancement.
 - setting default value.
-- more product support. [ing, unavailable now].
 - optimize optional and required.
-- optimize ack templates.
+- optimize for ack.
 
 
