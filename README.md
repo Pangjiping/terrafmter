@@ -64,7 +64,6 @@ variable "default" {
 }
 
 
-
 # [TODO] PLEASE EDIT.
 # Details in https://registry.terraform.io/providers/aliyun/alicloud/1.173.0/docs/data-sources/cs_kubernetes_version
 data "alicloud_cs_kubernetes_version" "default" {
@@ -78,6 +77,11 @@ data "alicloud_cs_kubernetes_version" "default" {
 
 }
 ```
+
+## Enhancements for ack (future)
+- auto attach resource and datasource.
+- set recommended fields.
+- full field enumeration.
 
 ## TODOs
 - template enhancement.

@@ -9,6 +9,7 @@ import (
 var (
 	resources = []string{
 		"cs_serverless_kubernetes",
+		"instance",
 	}
 	datas = []string{
 		"cs_kubernetes_version",
