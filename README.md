@@ -83,7 +83,7 @@ data "alicloud_cs_kubernetes_version" "default" {
 - template enhancement.
 - setting default value.
 - more product support. [ing, unavailable now].
-- group by parameters.
 - optimize optional and required.
+- optimize ack templates.
 
 

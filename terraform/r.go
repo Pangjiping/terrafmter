@@ -6,10 +6,10 @@ func init() {
 	DataSourceMap = map[string]string{
 		"account":                         "account",
 		"caller_identity":                 "caller_identity",
-		"alicloud_images":                 dataSourceAlicloudImages(),
-		"alicloud_regions":                dataSourceAlicloudRegions(),
-		"alicloud_zones":                  dataSourceAlicloudZones(),
-		"alicloud_db_zones":               dataSourceAlicloudDBZones(),
+		"images":"images",
+		"regions":                "regions",
+		"zones":               "zones",
+		"db_zones":               "db_zones",
 		"alicloud_instance_type_families": dataSourceAlicloudInstanceTypeFamilies(),
 		"alicloud_instance_types":         dataSourceAlicloudInstanceTypes(),
 		"alicloud_instances":              dataSourceAlicloudInstances(),
@@ -282,232 +282,232 @@ func init() {
 		"alicloud_cms_monitor_groups":                          dataSourceAlicloudCmsMonitorGroups(),
 		"alicloud_ram_saml_providers":                          dataSourceAlicloudRamSamlProviders(),
 		"alicloud_quotas_quotas":                               dataSourceAlicloudQuotasQuotas(),
-		"alicloud_quotas_application_infos":                    dataSourceAlicloudQuotasQuotaApplications(),
-		"alicloud_cms_monitor_group_instanceses":               dataSourceAlicloudCmsMonitorGroupInstances(),
-		"alicloud_cms_monitor_group_instances":                 dataSourceAlicloudCmsMonitorGroupInstances(),
-		"alicloud_quotas_quota_alarms":                         dataSourceAlicloudQuotasQuotaAlarms(),
-		"alicloud_ecs_commands":                                dataSourceAlicloudEcsCommands(),
-		"alicloud_cloud_storage_gateway_storage_bundles":       dataSourceAlicloudCloudStorageGatewayStorageBundles(),
-		"alicloud_ecs_hpc_clusters":                            dataSourceAlicloudEcsHpcClusters(),
-		"alicloud_brain_industrial_pid_loops":                  dataSourceAlicloudBrainIndustrialPidLoops(),
-		"alicloud_quotas_quota_applications":                   dataSourceAlicloudQuotasQuotaApplications(),
-		"alicloud_ecs_auto_snapshot_policies":                  dataSourceAlicloudEcsAutoSnapshotPolicies(),
-		"alicloud_rds_parameter_groups":                        dataSourceAlicloudRdsParameterGroups(),
-		"alicloud_ecs_launch_templates":                        dataSourceAlicloudEcsLaunchTemplates(),
-		"alicloud_resource_manager_control_policies":           dataSourceAlicloudResourceManagerControlPolicies(),
-		"alicloud_resource_manager_control_policy_attachments": dataSourceAlicloudResourceManagerControlPolicyAttachments(),
-		"alicloud_rds_accounts":                                dataSourceAlicloudRdsAccounts(),
-		"alicloud_havips":                                      dataSourceAlicloudHavips(),
-		"alicloud_ecs_snapshots":                               dataSourceAlicloudEcsSnapshots(),
-		"alicloud_ecs_key_pairs":                               dataSourceAlicloudEcsKeyPairs(),
-		"alicloud_adb_db_clusters":                             dataSourceAlicloudAdbDbClusters(),
-		"alicloud_vpc_flow_logs":                               dataSourceAlicloudVpcFlowLogs(),
-		"alicloud_network_acls":                                dataSourceAlicloudNetworkAcls(),
-		"alicloud_ecs_disks":                                   dataSourceAlicloudEcsDisks(),
-		"alicloud_ddoscoo_domain_resources":                    dataSourceAlicloudDdoscooDomainResources(),
-		"alicloud_ddoscoo_ports":                               dataSourceAlicloudDdoscooPorts(),
-		"alicloud_slb_load_balancers":                          dataSourceAlicloudSlbLoadBalancers(),
-		"alicloud_ecs_network_interfaces":                      dataSourceAlicloudEcsNetworkInterfaces(),
-		"alicloud_config_aggregators":                          dataSourceAlicloudConfigAggregators(),
-		"alicloud_config_aggregate_config_rules":               dataSourceAlicloudConfigAggregateConfigRules(),
-		"alicloud_config_aggregate_compliance_packs":           dataSourceAlicloudConfigAggregateCompliancePacks(),
-		"alicloud_config_compliance_packs":                     dataSourceAlicloudConfigCompliancePacks(),
-		"alicloud_eip_addresses":                               dataSourceAlicloudEipAddresses(),
-		"alicloud_direct_mail_receiverses":                     dataSourceAlicloudDirectMailReceiverses(),
-		"alicloud_log_projects":                                dataSourceAlicloudLogProjects(),
-		"alicloud_log_stores":                                  dataSourceAlicloudLogStores(),
-		"alicloud_event_bridge_service":                        dataSourceAlicloudEventBridgeService(),
-		"alicloud_event_bridge_event_buses":                    dataSourceAlicloudEventBridgeEventBuses(),
-		"alicloud_amqp_virtual_hosts":                          dataSourceAlicloudAmqpVirtualHosts(),
-		"alicloud_amqp_queues":                                 dataSourceAlicloudAmqpQueues(),
-		"alicloud_amqp_exchanges":                              dataSourceAlicloudAmqpExchanges(),
-		"alicloud_cassandra_backup_plans":                      dataSourceAlicloudCassandraBackupPlans(),
-		"alicloud_cen_transit_router_peer_attachments":         dataSourceAlicloudCenTransitRouterPeerAttachments(),
-		"alicloud_amqp_instances":                              dataSourceAlicloudAmqpInstances(),
-		"alicloud_hbr_vaults":                                  dataSourceAlicloudHbrVaults(),
-		"alicloud_ssl_certificates_service_certificates":       dataSourceAlicloudSslCertificatesServiceCertificates(),
-		"alicloud_arms_alert_contacts":                         dataSourceAlicloudArmsAlertContacts(),
-		"alicloud_event_bridge_rules":                          dataSourceAlicloudEventBridgeRules(),
-		"alicloud_cloud_firewall_control_policies":             dataSourceAlicloudCloudFirewallControlPolicies(),
-		"alicloud_sae_namespaces":                              dataSourceAlicloudSaeNamespaces(),
-		"alicloud_sae_config_maps":                             dataSourceAlicloudSaeConfigMaps(),
-		"alicloud_alb_security_policies":                       dataSourceAlicloudAlbSecurityPolicies(),
-		"alicloud_event_bridge_event_sources":                  dataSourceAlicloudEventBridgeEventSources(),
-		"alicloud_ecd_policy_groups":                           dataSourceAlicloudEcdPolicyGroups(),
-		"alicloud_ecp_key_pairs":                               dataSourceAlicloudEcpKeyPairs(),
-		"alicloud_hbr_ecs_backup_plans":                        dataSourceAlicloudHbrEcsBackupPlans(),
-		"alicloud_hbr_nas_backup_plans":                        dataSourceAlicloudHbrNasBackupPlans(),
-		"alicloud_hbr_oss_backup_plans":                        dataSourceAlicloudHbrOssBackupPlans(),
-		"alicloud_scdn_domains":                                dataSourceAlicloudScdnDomains(),
-		"alicloud_alb_server_groups":                           dataSourceAlicloudAlbServerGroups(),
-		"alicloud_data_works_folders":                          dataSourceAlicloudDataWorksFolders(),
-		"alicloud_arms_alert_contact_groups":                   dataSourceAlicloudArmsAlertContactGroups(),
-		"alicloud_express_connect_access_points":               dataSourceAlicloudExpressConnectAccessPoints(),
-		"alicloud_cloud_storage_gateway_gateways":              dataSourceAlicloudCloudStorageGatewayGateways(),
-		"alicloud_lindorm_instances":                           dataSourceAlicloudLindormInstances(),
-		"alicloud_express_connect_physical_connection_service": dataSourceAlicloudExpressConnectPhysicalConnectionService(),
-		"alicloud_cddc_dedicated_host_groups":                  dataSourceAlicloudCddcDedicatedHostGroups(),
-		"alicloud_hbr_ecs_backup_clients":                      dataSourceAlicloudHbrEcsBackupClients(),
-		"alicloud_msc_sub_contacts":                            dataSourceAlicloudMscSubContacts(),
-		"alicloud_express_connect_physical_connections":        dataSourceAlicloudExpressConnectPhysicalConnections(),
-		"alicloud_alb_load_balancers":                          dataSourceAlicloudAlbLoadBalancers(),
-		"alicloud_alb_zones":                                   dataSourceAlicloudAlbZones(),
-		"alicloud_sddp_rules":                                  dataSourceAlicloudSddpRules(),
-		"alicloud_bastionhost_user_groups":                     dataSourceAlicloudBastionhostUserGroups(),
-		"alicloud_security_center_groups":                      dataSourceAlicloudSecurityCenterGroups(),
-		"alicloud_alb_acls":                                    dataSourceAlicloudAlbAcls(),
-		"alicloud_hbr_snapshots":                               dataSourceAlicloudHbrSnapshots(),
-		"alicloud_bastionhost_users":                           dataSourceAlicloudBastionhostUsers(),
-		"alicloud_dfs_access_groups":                           dataSourceAlicloudDfsAccessGroups(),
-		"alicloud_ehpc_job_templates":                          dataSourceAlicloudEhpcJobTemplates(),
-		"alicloud_sddp_configs":                                dataSourceAlicloudSddpConfigs(),
-		"alicloud_hbr_restore_jobs":                            dataSourceAlicloudHbrRestoreJobs(),
-		"alicloud_alb_listeners":                               dataSourceAlicloudAlbListeners(),
-		"alicloud_ens_key_pairs":                               dataSourceAlicloudEnsKeyPairs(),
-		"alicloud_sae_applications":                            dataSourceAlicloudSaeApplications(),
-		"alicloud_alb_rules":                                   dataSourceAlicloudAlbRules(),
-		"alicloud_cms_metric_rule_templates":                   dataSourceAlicloudCmsMetricRuleTemplates(),
-		"alicloud_iot_device_groups":                           dataSourceAlicloudIotDeviceGroups(),
-		"alicloud_express_connect_virtual_border_routers":      dataSourceAlicloudExpressConnectVirtualBorderRouters(),
-		"alicloud_imm_projects":                                dataSourceAlicloudImmProjects(),
-		"alicloud_click_house_db_clusters":                     dataSourceAlicloudClickHouseDbClusters(),
-		"alicloud_direct_mail_domains":                         dataSourceAlicloudDirectMailDomains(),
-		"alicloud_bastionhost_host_groups":                     dataSourceAlicloudBastionhostHostGroups(),
-		"alicloud_vpc_dhcp_options_sets":                       dataSourceAlicloudVpcDhcpOptionsSets(),
-		"alicloud_alb_health_check_templates":                  dataSourceAlicloudAlbHealthCheckTemplates(),
-		"alicloud_cdn_real_time_log_deliveries":                dataSourceAlicloudCdnRealTimeLogDeliveries(),
-		"alicloud_click_house_accounts":                        dataSourceAlicloudClickHouseAccounts(),
-		"alicloud_direct_mail_mail_addresses":                  dataSourceAlicloudDirectMailMailAddresses(),
-		"alicloud_database_gateway_gateways":                   dataSourceAlicloudDatabaseGatewayGateways(),
-		"alicloud_bastionhost_hosts":                           dataSourceAlicloudBastionhostHosts(),
-		"alicloud_amqp_bindings":                               dataSourceAlicloudAmqpBindings(),
-		"alicloud_slb_tls_cipher_policies":                     dataSourceAlicloudSlbTlsCipherPolicies(),
-		"alicloud_cloud_sso_directories":                       dataSourceAlicloudCloudSsoDirectories(),
-		"alicloud_bastionhost_host_accounts":                   dataSourceAlicloudBastionhostHostAccounts(),
-		"alicloud_waf_certificates":                            dataSourceAlicloudWafCertificates(),
-		"alicloud_simple_application_server_instances":         dataSourceAlicloudSimpleApplicationServerInstances(),
-		"alicloud_simple_application_server_plans":             dataSourceAlicloudSimpleApplicationServerPlans(),
-		"alicloud_simple_application_server_images":            dataSourceAlicloudSimpleApplicationServerImages(),
-		"alicloud_video_surveillance_system_groups":            dataSourceAlicloudVideoSurveillanceSystemGroups(),
-		"alicloud_msc_sub_subscriptions":                       dataSourceAlicloudMscSubSubscriptions(),
-		"alicloud_sddp_instances":                              dataSourceAlicloudSddpInstances(),
-		"alicloud_vpc_nat_ip_cidrs":                            dataSourceAlicloudVpcNatIpCidrs(),
-		"alicloud_vpc_nat_ips":                                 dataSourceAlicloudVpcNatIps(),
-		"alicloud_quick_bi_users":                              dataSourceAlicloudQuickBiUsers(),
-		"alicloud_vod_domains":                                 dataSourceAlicloudVodDomains(),
-		"alicloud_arms_dispatch_rules":                         dataSourceAlicloudArmsDispatchRules(),
-		"alicloud_open_search_app_groups":                      dataSourceAlicloudOpenSearchAppGroups(),
-		"alicloud_graph_database_db_instances":                 dataSourceAlicloudGraphDatabaseDbInstances(),
-		"alicloud_arms_prometheus_alert_rules":                 dataSourceAlicloudArmsPrometheusAlertRules(),
-		"alicloud_dbfs_instances":                              dataSourceAlicloudDbfsInstances(),
-		"alicloud_rdc_organizations":                           dataSourceAlicloudRdcOrganizations(),
-		"alicloud_eais_instances":                              dataSourceAlicloudEaisInstances(),
-		"alicloud_sae_ingresses":                               dataSourceAlicloudSaeIngresses(),
-		"alicloud_cloudauth_face_configs":                      dataSourceAlicloudCloudauthFaceConfigs(),
-		"alicloud_imp_app_templates":                           dataSourceAlicloudImpAppTemplates(),
-		"alicloud_mhub_products":                               dataSourceAlicloudMhubProducts(),
-		"alicloud_cloud_sso_scim_server_credentials":           dataSourceAlicloudCloudSsoScimServerCredentials(),
-		"alicloud_dts_subscription_jobs":                       dataSourceAlicloudDtsSubscriptionJobs(),
-		"alicloud_service_mesh_service_meshes":                 dataSourceAlicloudServiceMeshServiceMeshes(),
-		"alicloud_service_mesh_versions":                       dataSourceAlicloudServiceMeshVersions(),
-		"alicloud_mhub_apps":                                   dataSourceAlicloudMhubApps(),
-		"alicloud_cloud_sso_groups":                            dataSourceAlicloudCloudSsoGroups(),
-		"alicloud_hbr_backup_jobs":                             dataSourceAlicloudHbrBackupJobs(),
-		"alicloud_click_house_regions":                         dataSourceAlicloudClickHouseRegions(),
-		"alicloud_dts_synchronization_jobs":                    dataSourceAlicloudDtsSynchronizationJobs(),
-		"alicloud_cloud_firewall_instances":                    dataSourceAlicloudCloudFirewallInstances(),
-		"alicloud_cr_endpoint_acl_policies":                    dataSourceAlicloudCrEndpointAclPolicies(),
-		"alicloud_cr_endpoint_acl_service":                     dataSourceAlicloudCrEndpointAclService(),
-		"alicloud_actiontrail_history_delivery_jobs":           dataSourceAlicloudActiontrailHistoryDeliveryJobs(),
-		"alicloud_sae_instance_specifications":                 dataSourceAlicloudSaeInstanceSpecifications(),
-		"alicloud_cen_transit_router_service":                  dataSourceAlicloudCenTransitRouterService(),
-		"alicloud_ecs_deployment_sets":                         dataSourceAlicloudEcsDeploymentSets(),
-		"alicloud_cloud_sso_users":                             dataSourceAlicloudCloudSsoUsers(),
-		"alicloud_cloud_sso_access_configurations":             
-		"alicloud_dfs_file_systems":                          
-		"alicloud_dfs_zones":                                 
-		"alicloud_vpc_traffic_mirror_filters":                 
-		"alicloud_dfs_access_rules":                         
-		"alicloud_nas_zones":                                  
-		"alicloud_dfs_mount_points":                           
-		"alicloud_vpc_traffic_mirror_filter_egress_rules":     
-		"alicloud_ecd_simple_office_sites":                    
-		"alicloud_vpc_traffic_mirror_filter_ingress_rules":    
-		"alicloud_ecd_nas_file_systems":                       
-		"alicloud_vpc_traffic_mirror_service":                
-		"alicloud_msc_sub_webhooks":                         
-		"alicloud_ecd_users":                                 
-		"alicloud_vpc_traffic_mirror_sessions":              
-		"alicloud_gpdb_accounts":                             
-		"alicloud_vpc_ipv6_gateways":                      
-		"alicloud_vpc_ipv6_egress_rules":                     
-		"alicloud_vpc_ipv6_addresses":                        
-		"alicloud_hbr_server_backup_plans":                 
-		"alicloud_cms_dynamic_tag_groups":                  
-		"alicloud_ecd_network_packages":                     
-		"alicloud_cloud_storage_gateway_gateway_smb_users":    
-		"alicloud_vpc_ipv6_internet_bandwidths":                
-		"alicloud_simple_application_server_firewall_rules":   
-		"alicloud_pvtz_endpoints":                             
-		"alicloud_pvtz_resolver_zones":                      
-		"alicloud_pvtz_rules":                                
-		"alicloud_ecd_bundles":                               
-		"alicloud_simple_application_server_disks":            
-		"alicloud_simple_application_server_snapshots":       
-		"alicloud_simple_application_server_custom_images":     
-		"alicloud_cloud_storage_gateway_stocks":                
-		"alicloud_cloud_storage_gateway_gateway_cache_disks":  
-		"alicloud_cloud_storage_gateway_gateway_block_volumes":
-		"alicloud_direct_mail_tags":                           
-		"alicloud_cloud_storage_gateway_gateway_file_shares": 
-		"alicloud_ecd_desktops":                               
-		"alicloud_cloud_storage_gateway_express_syncs":        
-		"alicloud_oos_applications":                           
-		"alicloud_eci_virtual_nodes":                         
-		"alicloud_eci_zones":                                
-		"alicloud_ros_stack_instances":                     
-		"alicloud_ros_regions":                             
-		"alicloud_ecs_dedicated_host_clusters":            
-		"alicloud_oos_application_groups":                  
-		"alicloud_dts_consumer_channels":                
-		"alicloud_emr_clusters":                              
-		"alicloud_ecd_images":                                
-		"alicloud_oos_patch_baselines":                       
-		"alicloud_ecd_commands":                              
-		"alicloud_cddc_zones":                               
-		"alicloud_cddc_host_ecs_level_infos":             
-		"alicloud_cddc_dedicated_hosts":                       
-		"alicloud_oos_parameters":                             
-		"alicloud_oos_state_configurations":                 
-		"alicloud_oos_secret_parameters":                     
-		"alicloud_click_house_backup_policies":              
-		"alicloud_cloud_sso_service":                          
-		"alicloud_mongodb_audit_policies":                  
-		"alicloud_mongodb_accounts":                           
-		"alicloud_mongodb_serverless_instances":               
-		"alicloud_cddc_dedicated_host_accounts":              
-		"alicloud_cr_chart_namespaces":                        
-		"alicloud_fnf_executions":                        
-		"alicloud_cr_chart_repositories":                   
-		"alicloud_mongodb_sharding_network_public_addresses":   
-		"alicloud_ga_acls":                                     
-		"alicloud_ga_additional_certificates":                
-		"alicloud_alidns_custom_lines":                  
-		"alicloud_ros_template_scratches":                  
-		"alicloud_alidns_gtm_instances":                   
-		"alicloud_vpc_bgp_groups":                         
-		"alicloud_nas_snapshots":                           
-		"alicloud_hbr_replication_vault_regions":          
-		"alicloud_alidns_address_pools":                     
-		"alicloud_ecs_prefix_lists":                          
-		"alicloud_alidns_access_strategies":                   
-		"alicloud_vpc_bgp_peers":                             
-		"alicloud_nas_filesets":                            
-		"cdn_ip_info":                                     
-		"nas_auto_snapshot_policies":                       
-		"nas_lifecycle_policies":                        
-		"vpc_bgp_networks":                              
-		"nas_data_flows":                                       
+		"alicloud_quotas_application_infos":
+		"alicloud_cms_monitor_group_instanceses":
+		"alicloud_cms_monitor_group_instances":
+		"alicloud_quotas_quota_alarms":
+		"alicloud_ecs_commands":
+		"alicloud_cloud_storage_gateway_storage_bundles":
+		"alicloud_ecs_hpc_clusters":
+		"alicloud_brain_industrial_pid_loops":
+		"alicloud_quotas_quota_applications":
+		"alicloud_ecs_auto_snapshot_policies":
+		"alicloud_rds_parameter_groups":
+		"alicloud_ecs_launch_templates":
+		"alicloud_resource_manager_control_policies":
+		"alicloud_resource_manager_control_policy_attachments":
+		"alicloud_rds_accounts":
+		"alicloud_havips":
+		"alicloud_ecs_snapshots":
+		"alicloud_ecs_key_pairs":
+		"alicloud_adb_db_clusters":
+		"alicloud_vpc_flow_logs":
+		"alicloud_network_acls":
+		"alicloud_ecs_disks":
+		"alicloud_ddoscoo_domain_resources":
+		"alicloud_ddoscoo_ports":
+		"alicloud_slb_load_balancers":
+		"alicloud_ecs_network_interfaces":
+		"alicloud_config_aggregators":
+		"alicloud_config_aggregate_config_rules":
+		"alicloud_config_aggregate_compliance_packs":
+		"alicloud_config_compliance_packs":
+		"alicloud_eip_addresses":
+		"alicloud_direct_mail_receiverses":
+		"alicloud_log_projects":
+		"alicloud_log_stores":
+		"alicloud_event_bridge_service":
+		"alicloud_event_bridge_event_buses":
+		"alicloud_amqp_virtual_hosts":
+		"alicloud_amqp_queues":
+		"alicloud_amqp_exchanges":
+		"alicloud_cassandra_backup_plans":
+		"alicloud_cen_transit_router_peer_attachments":
+		"alicloud_amqp_instances":
+		"alicloud_hbr_vaults":
+		"alicloud_ssl_certificates_service_certificates":
+		"alicloud_arms_alert_contacts":
+		"alicloud_event_bridge_rules":
+		"alicloud_cloud_firewall_control_policies":
+		"alicloud_sae_namespaces":
+		"alicloud_sae_config_maps":
+		"alicloud_alb_security_policies":
+		"alicloud_event_bridge_event_sources":
+		"alicloud_ecd_policy_groups":
+		"alicloud_ecp_key_pairs":
+		"alicloud_hbr_ecs_backup_plans":
+		"alicloud_hbr_nas_backup_plans":
+		"alicloud_hbr_oss_backup_plans":
+		"alicloud_scdn_domains":
+		"alicloud_alb_server_groups":
+		"alicloud_data_works_folders":
+		"alicloud_arms_alert_contact_groups":
+		"alicloud_express_connect_access_points":
+		"alicloud_cloud_storage_gateway_gateways":
+		"alicloud_lindorm_instances":
+		"alicloud_express_connect_physical_connection_service":
+		"alicloud_cddc_dedicated_host_groups":
+		"alicloud_hbr_ecs_backup_clients":
+		"alicloud_msc_sub_contacts":
+		"alicloud_express_connect_physical_connections":
+		"alicloud_alb_load_balancers":
+		"alicloud_alb_zones":
+		"alicloud_sddp_rules":
+		"alicloud_bastionhost_user_groups":
+		"alicloud_security_center_groups":
+		"alicloud_alb_acls":
+		"alicloud_hbr_snapshots":
+		"alicloud_bastionhost_users":
+		"alicloud_dfs_access_groups":
+		"alicloud_ehpc_job_templates":
+		"alicloud_sddp_configs":
+		"alicloud_hbr_restore_jobs":
+		"alicloud_alb_listeners":
+		"alicloud_ens_key_pairs":
+		"alicloud_sae_applications":
+		"alicloud_alb_rules":
+		"alicloud_cms_metric_rule_templates":
+		"alicloud_iot_device_groups":
+		"alicloud_express_connect_virtual_border_routers":
+		"alicloud_imm_projects":
+		"alicloud_click_house_db_clusters":
+		"alicloud_direct_mail_domains":
+		"alicloud_bastionhost_host_groups":
+		"alicloud_vpc_dhcp_options_sets":
+		"alicloud_alb_health_check_templates":
+		"alicloud_cdn_real_time_log_deliveries":
+		"alicloud_click_house_accounts":
+		"alicloud_direct_mail_mail_addresses":
+		"alicloud_database_gateway_gateways":
+		"alicloud_bastionhost_hosts":
+		"alicloud_amqp_bindings":
+		"alicloud_slb_tls_cipher_policies":
+		"alicloud_cloud_sso_directories":
+		"alicloud_bastionhost_host_accounts":
+		"alicloud_waf_certificates":
+		"alicloud_simple_application_server_instances":
+		"alicloud_simple_application_server_plans":
+		"alicloud_simple_application_server_images":
+		"alicloud_video_surveillance_system_groups":
+		"alicloud_msc_sub_subscriptions":
+		"alicloud_sddp_instances":
+		"alicloud_vpc_nat_ip_cidrs":
+		"alicloud_vpc_nat_ips":
+		"alicloud_quick_bi_users":
+		"alicloud_vod_domains":
+		"alicloud_arms_dispatch_rules":
+		"alicloud_open_search_app_groups":
+		"alicloud_graph_database_db_instances":
+		"alicloud_arms_prometheus_alert_rules":
+		"alicloud_dbfs_instances":
+		"alicloud_rdc_organizations":
+		"alicloud_eais_instances":
+		"alicloud_sae_ingresses":
+		"alicloud_cloudauth_face_configs":
+		"alicloud_imp_app_templates":
+		"alicloud_mhub_products":
+		"cloud_sso_scim_server_credentials":  "cloud_sso_scim_server_credentials",
+		"dts_subscription_jobs": "dts_subscription_jobs",
+		"service_mesh_service_meshes":"service_mesh_service_meshes",
+		"service_mesh_versions":"service_mesh_versions",
+		"mhub_apps":"mhub_apps",
+		"cloud_sso_groups":"cloud_sso_groups",
+		"hbr_backup_jobs":"hbr_backup_jobs",
+		"click_house_regions":"click_house_regions",
+		"dts_synchronization_jobs":"dts_synchronization_jobs",
+		"cloud_firewall_instances":"cloud_firewall_instances",
+		"cr_endpoint_acl_policies":"cr_endpoint_acl_policies",
+		"cr_endpoint_acl_service":"cr_endpoint_acl_service",
+		"actiontrail_history_delivery_jobs":"actiontrail_history_delivery_jobs",
+		"sae_instance_specifications":"sae_instance_specifications",
+		"cen_transit_router_service":"cen_transit_router_service",
+		"ecs_deployment_sets":"ecs_deployment_sets",
+		"cloud_sso_users":"cloud_sso_users",
+		"cloud_sso_access_configurations":  "cloud_sso_access_configurations",
+		"dfs_file_systems": "dfs_file_systems",
+		"dfs_zones":  "dfs_zones",
+		"vpc_traffic_mirror_filters":  "vpc_traffic_mirror_filters",
+		"dfs_access_rules":"dfs_access_rules",
+		"nas_zones": "nas_zones",
+		"dfs_mount_points": "dfs_mount_points",
+		"vpc_traffic_mirror_filter_egress_rules":  "vpc_traffic_mirror_filter_egress_rules",
+		"ecd_simple_office_sites": "ecd_simple_office_sites",
+		"vpc_traffic_mirror_filter_ingress_rules": "vpc_traffic_mirror_filter_ingress_rules",
+		"ecd_nas_file_systems":  "ecd_nas_file_systems",
+		"vpc_traffic_mirror_service": "vpc_traffic_mirror_service",
+		"msc_sub_webhooks":"msc_sub_webhooks",
+		"ecd_users": "ecd_users",
+		"vpc_traffic_mirror_sessions":"vpc_traffic_mirror_sessions",
+		"gpdb_accounts":  "gpdb_accounts",
+		"vpc_ipv6_gateways":  "vpc_ipv6_gateways",
+		"vpc_ipv6_egress_rules": "vpc_ipv6_egress_rules",
+		"vpc_ipv6_addresses":   "vpc_ipv6_addresses",
+		"hbr_server_backup_plans": "hbr_server_backup_plans",
+		"cms_dynamic_tag_groups": "cms_dynamic_tag_groups",
+		"ecd_network_packages":  "ecd_network_packages",
+		"cloud_storage_gateway_gateway_smb_users":"cloud_storage_gateway_gateway_smb_users",
+		"vpc_ipv6_internet_bandwidths": "vpc_ipv6_internet_bandwidths",
+		"simple_application_server_firewall_rules": "simple_application_server_firewall_rules",
+		"pvtz_endpoints": "pvtz_endpoints",
+		"pvtz_resolver_zones":   "pvtz_resolver_zones",
+		"pvtz_rules": "pvtz_rules",
+		"ecd_bundles":   "ecd_bundles",
+		"simple_application_server_disks":  "simple_application_server_disks",
+		"simple_application_server_snapshots": "simple_application_server_snapshots",
+		"simple_application_server_custom_images": "simple_application_server_custom_images",
+		"cloud_storage_gateway_stocks":  "cloud_storage_gateway_stocks",
+		"cloud_storage_gateway_gateway_cache_disks": "cloud_storage_gateway_gateway_cache_disks",
+		"cloud_storage_gateway_gateway_block_volumes":"cloud_storage_gateway_gateway_block_volumes",
+		"direct_mail_tags":  "direct_mail_tags",
+		"cloud_storage_gateway_gateway_file_shares":"cloud_storage_gateway_gateway_file_shares",
+		"ecd_desktops":  "ecd_desktops",
+		"cloud_storage_gateway_express_syncs":"cloud_storage_gateway_express_syncs",
+		"oos_applications": "oos_applications",
+		"eci_virtual_nodes":  "eci_virtual_nodes",
+		"eci_zones": "eci_zones",
+		"ros_stack_instances":  "ros_stack_instances",
+		"ros_regions":  "ros_regions",
+		"ecs_dedicated_host_clusters": "ecs_dedicated_host_clusters",
+		"oos_application_groups": "oos_application_groups",
+		"dts_consumer_channels": "dts_consumer_channels",
+		"emr_clusters": "emr_clusters",
+		"ecd_images":"ecd_images",
+		"oos_patch_baselines": "oos_patch_baselines",
+		"ecd_commands": "ecd_commands",
+		"cddc_zones":  "cddc_zones",
+		"cddc_host_ecs_level_infos":  "cddc_host_ecs_level_infos",
+		"cddc_dedicated_hosts": "cddc_dedicated_hosts",
+		"oos_parameters": "oos_parameters",
+		"oos_state_configurations": "oos_state_configurations",
+		"oos_secret_parameters":  "oos_secret_parameters",
+		"click_house_backup_policies":"click_house_backup_policies",
+		"cloud_sso_service":  "cloud_sso_service",
+		"mongodb_audit_policies":   "mongodb_audit_policies",
+		"mongodb_accounts":   "mongodb_accounts",
+		"mongodb_serverless_instances":"mongodb_serverless_instances",
+		"cddc_dedicated_host_accounts":"cddc_dedicated_host_accounts",
+		"cr_chart_namespaces": "cr_chart_namespaces",
+		"fnf_executions":   "fnf_executions",
+		"cr_chart_repositories": "cr_chart_repositories",
+		"mongodb_sharding_network_public_addresses":"mongodb_sharding_network_public_addresses",
+		"ga_acls": "ga_acls",
+		"ga_additional_certificates":  "ga_additional_certificates",
+		"alidns_custom_lines":  "alidns_custom_lines",
+		"ros_template_scratches":"ros_template_scratches",
+		"alidns_gtm_instances":  "alidns_gtm_instances",
+		"vpc_bgp_groups": "vpc_bgp_groups",
+		"nas_snapshots":  "nas_snapshots",
+		"hbr_replication_vault_regions": "hbr_replication_vault_regions",
+		"alidns_address_pools": "alidns_address_pools",
+		"ecs_prefix_lists":  "ecs_prefix_lists",
+		"alidns_access_strategies": "alidns_access_strategies",
+		"vpc_bgp_peers": "vpc_bgp_peers",
+		"nas_filesets": "nas_filesets",
+		"cdn_ip_info": "cdn_ip_info",
+		"nas_auto_snapshot_policies": "nas_auto_snapshot_policies",
+		"nas_lifecycle_policies":   "nas_lifecycle_policies",
+		"vpc_bgp_networks":"vpc_bgp_networks",
+		"nas_data_flows": "nas_data_flows",
 		"ecs_storage_capacity_units":                           "ecs_storage_capacity_units",
 		"dbfs_snapshots":                                       "dbfs_snapshots",
 		"msc_sub_contact_verification_message":                 "msc_sub_contact_verification_message",
@@ -516,36 +516,36 @@ func init() {
 		"mongodb_sharding_network_private_addresses":           "mongodb_sharding_network_private_addresses",
 		"ecp_instances":  "ecp_instances",                                   
 		"ecp_zones":  "ecp_zones",                                         
-		"ecp_instance_types": "ecp_instance_types",                                 
+		"ecp_instance_types": "ecp_instance_types",
 		"dcdn_ipa_domains": "dcdn_ipa_domains",                                  
 		"sddp_data_limits":  "sddp_data_limits",                                 
-		"ecs_image_components":                               
-		"sae_application_scaling_rules":                      
-		"sae_grey_tag_routes":                               
-		"ecs_snapshot_groups":                                 
-		"vpn_ipsec_servers":                                   
-		"cr_chains":                                         
-		"vpn_pbr_route_entries":                               
-		"mse_znodes":                                         
-		"cen_transit_router_available_resources":      
-		"ecs_image_pipelines":                             
-		"hbr_ots_backup_plans":                                
-		"hbr_ots_snapshots":                                   
-		"bastionhost_host_share_keys":                   
-		"ecs_network_interface_permissions":                 
-		"mse_engine_namespaces":                              
-		"ga_accelerator_spare_ip_attachments":              
-		"smartag_flow_logs":                                    
-		"ecs_invocations":                                     
-		"ecd_snapshots":                                       
-		"tag_meta_tags":                                      
-		"ecd_desktop_types":                                   
-		"config_deliveries":                                   
-		"cms_namespaces":                                     
-		"cms_sls_groups":                                     
-		"config_aggregate_deliveries":                        
-		"edas_namespaces":                                  
-		"cdn_blocked_regions":                                 
+		"ecs_image_components":  "ecs_image_components",
+		"sae_application_scaling_rules":  "sae_application_scaling_rules",
+		"sae_grey_tag_routes":   "sae_grey_tag_routes",
+		"ecs_snapshot_groups": "ecs_snapshot_groups",
+		"vpn_ipsec_servers": "vpn_ipsec_servers",
+		"cr_chains":  "cr_chains",
+		"vpn_pbr_route_entries": "vpn_pbr_route_entries",
+		"mse_znodes": "mse_znodes",
+		"cen_transit_router_available_resources":  "cen_transit_router_available_resources",
+		"ecs_image_pipelines": "ecs_image_pipelines",
+		"hbr_ots_backup_plans": "hbr_ots_backup_plans",
+		"hbr_ots_snapshots": "hbr_ots_snapshots",
+		"bastionhost_host_share_keys": "bastionhost_host_share_keys",
+		"ecs_network_interface_permissions":   "ecs_network_interface_permissions",
+		"mse_engine_namespaces":   "mse_engine_namespaces",
+		"ga_accelerator_spare_ip_attachments": "ga_accelerator_spare_ip_attachments",
+		"smartag_flow_logs": "smartag_flow_logs",
+		"ecs_invocations": "ecs_invocations",
+		"ecd_snapshots":   "ecd_snapshots",
+		"tag_meta_tags":"tag_meta_tags",
+		"ecd_desktop_types": "ecd_desktop_types",
+		"config_deliveries": "config_deliveries",
+		"cms_namespaces":  "cms_namespaces",
+		"cms_sls_groups":  "cms_sls_groups",
+		"config_aggregate_deliveries":  "config_aggregate_deliveries",
+		"edas_namespaces": "edas_namespaces",
+		"cdn_blocked_regions": "cdn_blocked_regions",
 		"schedulerx_namespaces":                                "schedulerx_namespaces",
 		"ehpc_clusters": "ehpc_clusters", 
 		"cen_traffic_marking_policies": "cen_traffic_marking_policies",
