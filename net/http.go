@@ -21,7 +21,8 @@ func GetDocFromGithubV2(version, file string, isResource bool) error {
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("http server error, status code is %v", resp.StatusCode)
+		return fmt.Errorf("Status code is %v. Please network connection and resource/data %s by version %s",
+			resp.StatusCode, file, version)
 	}
 
 	doc, err := html.Parse(resp.Body)
