@@ -8,7 +8,7 @@ import (
 
 var (
 	resources = []string{
-		"cs_managed_kubernetes",
+		"cs_serverless_kubernetes",
 	}
 	datas = []string{
 		"cs_kubernetes_version",
