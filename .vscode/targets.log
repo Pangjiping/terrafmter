@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Mon Jul  4 22:58:06 2022
+# Make data base, printed on Tue Jul  5 22:45:48 2022
 
 # Variables
 
@@ -34,15 +34,19 @@ _ = /usr/bin/make
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 INFOPATH = /opt/homebrew/share/info:
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/s6/300jn_t108gbkxlxtcvb7yy00000gn/T/vscode-ipc-078400f2-9cbd-42d7-a092-91ffde9d996d.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/s6/300jn_t108gbkxlxtcvb7yy00000gn/T/vscode-ipc-8d8bd1ea-2243-4684-9de1-f7a0555c4a87.sock
 # environment
 VSCODE_CWD = /
+# environment
+GOPROXY = https://goproxy.cn
 # environment
 PATH = /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/usr/local/go/bin:/Library/Apple/usr/bin:/opt/homebrew/bin/git:/Users/pangjiping/gopath/bin:/Users/pangjiping/gopath/src/github.com/etcd-io/etcd/bin
 # environment
@@ -56,7 +60,7 @@ MYGIT = /Users/pangjiping/gopath/src/github.com/Pangjiping
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.xt1j87Lecg/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.CxQ3ge1ACC/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -70,7 +74,7 @@ ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
 MANPATH = /opt/homebrew/share/man::
 # environment
-VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+GOMODCACHE = /Users/pangjiping/gopath/pkg/mod
 # environment
 HOME = /Users/pangjiping
 # default
@@ -98,7 +102,7 @@ MAKE_VERSION := 3.81
 # environment
 USER = pangjiping
 # makefile
-.DEFAULT_GOAL := 
+.DEFAULT_GOAL := default
 # environment
 HOMEBREW_BOTTLE_DOMAIN = https://mirrors.ustc.edu.cn/homebrew-bottles/bottles
 # automatic
@@ -148,9 +152,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1189
+VSCODE_PID = 820
 # variable set hash-table stats:
-# Load=69/1024=7%, Rehash=0, Collisions=1/82=1%
+# Load=71/1024=7%, Rehash=0, Collisions=2/94=2%
 
 # Pattern-specific Variable Values
 
@@ -158,7 +162,7 @@ VSCODE_PID = 1189
 
 # Directories
 
-# . (device 16777232, inode 8960132): 17 files, no impossibilities.
+# . (device 16777231, inode 8960132): 17 files, no impossibilities.
 
 # 17 files, no impossibilities in 1 directories.
 
@@ -168,12 +172,34 @@ VSCODE_PID = 1189
 
 # Files
 
-# Not a target:
-all:
-#  Command-line target.
+mac:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+#  commands to execute (from `Makefile', line 10):
+	GOOS=darwin GOARCH=amd64 go build -o bin/terrafmtter
+	tar czvf bin/terrafmtter_darwin-amd64.tgz bin/terrafmtter
+	rm -rf bin/terrafmtter
+	
+
+# Not a target:
+all:
+#  Command-line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+copy:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 15):
+	tar -xvf bin/terrafmtter_darwin-amd64.tgz
+	mv bin/terrafmtter /usr/local/bin
+	mkdir -p /tmp/terrafmtter
+	
 
 # Not a target:
 .SUFFIXES:
@@ -183,6 +209,14 @@ all:
 
 # Not a target:
 Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-04 22:59:10
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+default: install
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -193,8 +227,22 @@ Makefile:
 #  Modification time never checked.
 #  File has not been updated.
 
+clean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 6):
+	rm -rf bin/*
+	rm -f usr/local/bin/terrafmtter
+	
+
+install: clean mac copy
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # files hash-table stats:
-# Load=4/1024=0%, Rehash=0, Collisions=0/5=0%
+# Load=9/1024=1%, Rehash=0, Collisions=0/25=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -206,8 +254,8 @@ Makefile:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Mon Jul  4 22:58:06 2022
+# Finished Make data base on Tue Jul  5 22:45:48 2022
 
  
-Makefile:1: *** missing separator.  Stop.
+make: *** No rule to make target `all'.  Stop.
 

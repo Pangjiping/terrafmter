@@ -47,6 +47,11 @@ func Execute(resources, datas []string, fileName, version string) error {
 		return err
 	}
 
+	// to_json for test.
+	if err := mappingToJson(); err != nil {
+		return err
+	}
+
 	// write to target file
 	if err := renderFile(fileName); err != nil {
 		return err

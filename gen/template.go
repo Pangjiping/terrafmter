@@ -24,7 +24,7 @@ variable "default" {
 # Details in {{.Url}}
 {{ .Type }} "alicloud_{{ .Name}}" "default" {
     {{- range .Fields }}
-    {{ .Name}} = "TODO" 
+    {{ .Name}} = var.{{ .Name}} 
     {{- end }}
 }
 {{ end }}`

@@ -1,6 +1,12 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/pangjiping/gopath/src/github.com/Pangjiping/terrafmtter'
+rm -rf bin/*
+rm -f usr/local/bin/terrafmtter
+GOOS=darwin GOARCH=amd64 go build -o bin/terrafmtter
+tar czvf bin/terrafmtter_darwin-amd64.tgz bin/terrafmtter
+rm -rf bin/terrafmtter
+tar -xvf bin/terrafmtter_darwin-amd64.tgz
+mv bin/terrafmtter /usr/local/bin
+mkdir -p /tmp/terrafmtter
 make: Leaving directory `/Users/pangjiping/gopath/src/github.com/Pangjiping/terrafmtter'
  
-Makefile:1: *** missing separator.  Stop.
-
